@@ -8,6 +8,7 @@ Dotfiles for my development environement.
 
 ```bash
 $ FRESH_LOCAL_SOURCE=Nate-Wilkins/dotfiles bash <(curl -sL get.freshshell.com)
+$ cp -fr ~/.dotfiles/.freshrc ~/.freshrc
 ```
 
 Managed with [fresh].
