@@ -1,13 +1,43 @@
-# fresh dotfiles
+# # # # # #
+# nate-wilkins fresh dotfiles
+# # # #
 
+# fresh
+
+## bin
 fresh freshshell/fresh bin/fresh --bin
 
-fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
+## completion
+# todo: ?
+#fresh freshshell/fresh contrib/completion/fresh-completion.zsh --file=completion/_fresh
 
-# zsh
-#fresh rupa/z z.sh
-
+# # # # #
 # git
+
+## config
+# todo: fresh not linking?
+#fresh git/.gitconfig --file=~/.gitconfig
+cp -fr ~/.dotfiles/git/.gitconfig ~/.gitconfig
+
+## bin
 fresh git/git contrib/diff-highlight/diff-highlight --bin
 fresh git/git contrib/git-jump/git-jump --bin
 fresh git/git contrib/stats/git-common-hash --bin
+
+# # # # #
+# atom
+
+# todo: fresh not working for directory linking
+#fresh .atom --file=~/.atom/
+rm -fr ~/.atom
+mkdir ~/.atom
+cp ~/.dotfiles/.atom/* ~/.atom
+
+## config
+# todo: ? weird on windows => \r issue
+#apm install --packages-file ~/.atom/packages.config
+
+# # # # #
+# zsh
+# todo: ?
+#fresh rupa/z z.sh
