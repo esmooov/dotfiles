@@ -1,0 +1,16 @@
+# Set your name and email with the following:
+#   git config -f ~/.gitconfig.local user.name John Doe
+#   git config -f ~/.gitconfig.local user.email john.doe@example.com
+
+[merge]
+	tool = kdiff3
+[diff]
+	guitool = kdiff3
+[core]
+	editor = \"C:/Program Files (x86)/GitExtensions/GitExtensions.exe\" fileeditor
+	autocrlf = false
+	eol = lf
+[mergetool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
+[difftool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
