@@ -26,6 +26,12 @@ fresh git/git contrib/git-jump/git-jump --bin
 fresh git/git contrib/stats/git-common-hash --bin
 
 # # # # #
+# kdiff3
+# todo: fresh not linking?
+#fresh kdiff3/.kdiff3rc --file=~/.kdiff3rc
+cp -fr ~/.dotfiles/kdiff3/.kdiff3rc ~/.kdiff3rc
+
+# # # # #
 # atom
 
 # todo: fresh not working for directory linking
