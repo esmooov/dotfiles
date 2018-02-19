@@ -1,0 +1,60 @@
+[core]
+    autocrlf = false
+
+[user]
+    name = nate-wilkins
+    email = nate-wilkins@code-null.com
+
+[diff]
+
+[color]
+    ui = auto
+
+[color "diff"]
+commit = yellow reverse
+
+[alias]
+    ri = rebase -i
+    cs = commit --squash
+    cf = commit --fixup
+    amend = commit --amend
+    lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    aa = add --all
+    fa = fetch --all
+    dh1 = diff HEAD~1
+    # update all submodules
+    subs = submodule foreach git pull origin master
+    # clean up fully merged branches
+    sweep = !git-sweep
+    # list only untracked files
+    untracked = ls-files --others --exclude-standard
+
+[github]
+    user = nate-wilkins
+
+[push]
+    # only push current branch
+    default = upstream
+
+[merge]
+    log = true
+    conflictstyle = diff3
+    tool = vimdiff
+
+[rebase]
+    autosquash = true
+    autostash = true
+
+[tag]
+    sort = version:refname
+
+[gitflow "branch"]
+    master = master
+    develop = develop
+
+[gitflow "prefix"]
+    feature = feature/
+    release = release/
+    hotfix = hotfix/
+    support = support/
+    versiontag =

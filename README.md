@@ -1,17 +1,15 @@
 # ~/.dotfiles
 
-Dotfiles for my development environment.
+[![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
+
+Dotfiles for my development environment. Managed with [fresh]!
 
 ## Installation
 
-##### Note: Inspect the integrity of the [`get.freshshell.com`](script) script before executing
-
-```bash
-FRESH_LOCAL_SOURCE=Nate-Wilkins/dotfiles bash <(curl -sL get.freshshell.com)
-cp -fr ~/.dotfiles/.freshrc ~/.freshrc
+```
+git clone https://github.com/nate-wilkins/.dotfiles
+sudo initialize.sh
 ```
 
-Managed with [fresh].
-
-[script]: get.freshshell.com
+[script]: http://get.freshshell.com
 [fresh]: http://freshshell.com
