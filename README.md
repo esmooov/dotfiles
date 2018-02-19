@@ -7,8 +7,11 @@ Dotfiles for my development environment. Managed with [fresh]!
 ## Installation
 
 ```
-git clone https://github.com/nate-wilkins/.dotfiles
-sudo initialize.sh
+git clone https://github.com/nate-wilkins/.dotfiles ~/.dotfiles
+chmod +x ~/.dotfiles/dependencies.sh && sudo ~/.dotfiles/dependencies.sh
+
+FRESH_LOCAL_SOURCE=Nate-Wilkins/dotfiles
+source <(curl -sL https://get.freshshell.com)
 ```
 
 [script]: http://get.freshshell.com
