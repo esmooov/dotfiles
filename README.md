@@ -16,7 +16,9 @@ sudo bash ~/.dotfiles/install.sh nate-wilkins
 
 These scripts assume you are `nate-wilkins`.
 
-Make sure you have setup a `<user-name>/.dotfiles` repository similar to [`nate-wilkins/.dotfiles`](https://github.com/nate-wilkins/.dotfiles) for these scripts to work.
+It is highly recommended you clone this repository if you're using it with [EvE.Ubuntu]
+if not it's okay to replace `nate-wilkins` with `<your-ubuntu-user>` (which assumes is your github username too.)
 
 [script]: http://get.freshshell.com
 [fresh]: http://freshshell.com
+[EvE.Ubuntu]: https://github.com/nate-wilkins/EvE.Ubuntu
