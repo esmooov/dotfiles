@@ -9,8 +9,14 @@ Dotfiles for my development environment. Managed with [fresh]!
 ```
 git clone https://github.com/nate-wilkins/.dotfiles ~/.dotfiles
 chmod +x ~/.dotfiles/install.sh
-sudo bash ~/.dotfiles/install.sh
+sudo bash ~/.dotfiles/install.sh nate-wilkins
 ```
+
+## *Note*
+
+These scripts assume you are `nate-wilkins`.
+
+Make sure you have setup a `<user-name>/.dotfiles` repository similar to [`nate-wilkins/.dotfiles`](https://github.com/nate-wilkins/.dotfiles) for these scripts to work.
 
 [script]: http://get.freshshell.com
 [fresh]: http://freshshell.com

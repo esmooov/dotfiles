@@ -4,18 +4,11 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
-root_dir=`dirname $0`
+[ -d /home/$1/.fresh ]   && rm -rf /home/$1/.fresh
+[ -f /home/$1/.freshrc ] && rm -f  /home/$1/.freshrc
+find /home/$1/ -lname "/home/$1/.fresh/*" -delete
 
-# -[ dependencies ]------------------------------------------- #
-# /
-apt install git
-apt install keychain
+cp /home/$1/.dotfiles/.freshrc /home/$1/.freshrc
 
-# -[ cleanup ]------------------------------------------------ #
-# /
-[ -d ~/.fresh ]   && rm -r ~/.fresh
-[ -f ~/.freshrc ] && rm    ~/.freshrc
-cp $root_dir/.freshrc ~/.freshrc
-
-FRESH_LOCAL_SOURCE=Nate-Wilkins/dotfiles
-source <(curl -sL https://get.freshshell.com)
+FRESH_LOCAL_SOURCE=$1/dotfiles
+runuser -l $1 -c 'source <(curl -sL https://get.freshshell.com)'
