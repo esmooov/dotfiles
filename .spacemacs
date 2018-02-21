@@ -78,7 +78,6 @@ values."
    dotspacemacs-verbose-loading nil
    dotspacemacs-startup-banner 'official
    dotspacemacs-startup-lists '((projects . 7)
-                                (agenda, 5)
                                 (recents . 5))
    dotspacemacs-startup-buffer-responsive t
    dotspacemacs-scratch-mode 'text-mode
