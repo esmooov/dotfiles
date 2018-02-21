@@ -12,7 +12,7 @@
    dotspacemacs-enable-lazy-installation 'all
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
-
+   dotspacemacs-delete-orphan-packages t
    dotspacemacs-configuration-layers
    '(
      elixir
@@ -45,6 +45,7 @@
      games
      command-log
      deft
+     vinegar
      rcirc
      slack
      prodigy
@@ -57,6 +58,14 @@
    '(
      editorconfig
      expand-region
+     emojify
+     google-this
+
+     ;; https://github.com/zk-phi/symon/
+     (symon :repo "https://github.com/zk-phi/symon/" :fetcher github)
+
+     ;; https://github.com/melpa/melpa#recipe-format
+     (speed-type :repo "hagleitn/speed-type" :fetcher github :files ("speed-type.el"))
      )
 
    dotspacemacs-frozen-packages '()
@@ -72,10 +81,10 @@ values."
   (setq-default
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
-   dotspacemacs-check-for-update nil
+   dotspacemacs-check-for-update t
    dotspacemacs-elpa-subdirectory nil
    dotspacemacs-editing-style 'vim
-   dotspacemacs-verbose-loading nil
+   dotspacemacs-verbose-loading t
    dotspacemacs-startup-banner 'official
    dotspacemacs-startup-lists '((projects . 7)
                                 (recents . 5))
@@ -159,6 +168,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
    ;; browse-kill-ring
    browse-kill-ring-show-preview nil
 
+   ;; twit
+   ;; https://github.com/hayamiz/twittering-mode/
+   twittering-use-master-password t
+   twittering-icon-mode t
+   twittering-convert-fix-size 48
+   twittering-use-icon-storage t
+   twittering-number-of-tweets-on-retrieval 50
+   twittering-timer-interval 30
+   twittering-display-remaining t
+
    ;; plantuml
    plantuml-jar-path (expand-file-name "c:/bin/plantuml/plantuml.jar")
    ))
@@ -171,16 +190,24 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; add custom plugins directory to load-path.
-  (push "~/.spacemacs-plugins/" load-path)
+  ;;(push "~/.spacemacs-plugins/" load-path)
+
+  (setq-default
+   deft-directory "~/Dropbox/Notes"
+   deft-extensions '("md", "txt"))
+
 
   ;; monitor the system clipboard and add any changes to the kill ring.
   (add-to-list 'after-init-hook 'clipmon-mode-start)
 
+  ;; enable emojis everywhere.
+  (add-hook 'after-init-hook #'global-emojify-mode)
+
   ;; - keybindings -
   (spacemacs/set-leader-keys "C-;" 'avy-goto-char-timer)
 
-  ;; - load plugins -
-  (autoload 'speed-type-text "speed-type"))
+  ;; - display sysinfo in minibuffer -
+  (symon-mode))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -197,7 +224,7 @@ you should place your code here."
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "ab2cbf30ab758c5e936b527377d543ce4927001742f79519b62c45ba9dd9f55e" default)))
- '(deft-directory "c:/Users/Nate-Wilkins/Dropbox/Notes")
+ '(deft-directory "~/Dropbox/Notes")
  '(deft-extensions (quote ("md")) t)
  '(deft-recursive t)
  '(desktop-save-mode t)

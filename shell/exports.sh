@@ -3,7 +3,8 @@
 # -[ env variables ] ----------------------------------------- #
 # /
 export GITHUB_USER=nate-wilkins
-
+export EDITOR=emacs
+export SUDO_EDITOR=emacs
 
 # -[ path ] -------------------------------------------------- #
 # /
