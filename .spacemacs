@@ -44,7 +44,28 @@
      twitter
      games
      command-log
+     ;; -[ deft ]---------------------------------------------------
+     ;; SPC a n	:: Open Deft (works globally)
+     ;; SPC m d	:: Delete selected note
+     ;; SPC m r	:: Rename selected note
+     ;; SPC m i	:: Toggle to regex search
+     ;; SPC m n	:: Create new file with filter text
      deft
+     ;; -[ vinegar ]------------------------------------------------
+     ;; -	      :: Navigate to parent directory in dired
+     ;; 0	      :: (Dired) Move to the beginning of the file in dired
+     ;; =	      :: (Dired) Diff between selected files
+     ;; C-j	    :: (Dired) Move to next subdirectory
+     ;; C-k	    :: (Dired) Move to previous sbdirectory
+     ;; I	      :: (Dired) Toggle showing dotfiles
+     ;; ~~~	    :: (Dired) Navigate to home directory
+     ;; f	      :: (Dired) Helm find file
+     ;; J	      :: (Dired) Goto file
+     ;; C-f	    :: (Dired) dired-find
+     ;; H	      :: (Dired) Show dired history
+     ;; T	      :: (Dired) Move down in dired tree
+     ;; K	      :: (Dired) Kill marked lines (hide, do not delete)
+     ;; r	      :: (Dired) Redisplay buffer
      vinegar
      rcirc
      slack

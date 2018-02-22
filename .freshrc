@@ -40,11 +40,14 @@ fresh-options
 
 # -[ config ]---------|---------------------|----------------- #
 # /
-[ -f ~/.bashrc ]  && rm ~/.bashrc
-
+[ -f ~/.bashrc ] && rm ~/.bashrc
 fresh-options                                                  --file=~/.bashrc
   fresh     freshshell/fresh         contrib/source-build.sh   # [fresh (dotfile manager)](https://freshshell.com/)
   fresh                                      .bashrc           # [bash](https://www.gnu.org/software/bash/)
+
+[ -f ~/.bash_logout ] && rm ~/.bash_logout
+fresh-options                                                  --file=~/.bash_logout
+  fresh                                      .bash_logout      # [bash](https://www.gnu.org/software/bash/)
 
 [ -f ~/.curlrc ] && rm ~/.curlrc
 fresh-options                                                  --file=~/.curlrc
