@@ -38,7 +38,9 @@ case "$TERM" in
 esac
 
 # dircolors
-eval "$(dircolors ~/.dircolors)"
+if [ -x /usr/bin/dircolors ]; then
+    eval "$(dircolors -b ~/.dircolors)"
+fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
