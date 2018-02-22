@@ -49,6 +49,10 @@ fresh-options                                                  --file=~/.bashrc
 fresh-options                                                  --file=~/.bash_logout
   fresh                                      .bash_logout      # [bash](https://www.gnu.org/software/bash/)
 
+[ -f ~/.dircolors ] && rm ~/.dircolors
+fresh-options                                                  --file=~/.dircolors
+  fresh                                      .dircolors
+
 [ -f ~/.curlrc ] && rm ~/.curlrc
 fresh-options                                                  --file=~/.curlrc
   fresh                                      .curlrc           # [curl](https://github.com/curl/curl)
