@@ -14,20 +14,23 @@
 commit = yellow reverse
 
 [alias]
-    ri = rebase -i
-    cs = commit --squash
-    cf = commit --fixup
-    amend = commit --amend
-    lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-    aa = add .
-    fa = fetch --all
-    dh1 = diff HEAD~1
-    # update all submodules
-    subs = submodule foreach git pull origin master
-    # clean up fully merged branches
-    sweep = !git-sweep
-    # list only untracked files
-    untracked = ls-files --others --exclude-standard
+  ri = rebase -i
+	mff = merge --ff-only
+  cs = commit --squash
+  cf = commit --fixup
+  amend = commit --amend
+  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  aa = add .
+  fa = fetch --all
+  dh1 = diff HEAD~1
+  # update all submodules
+  subs = submodule foreach git pull origin master
+  # clean up fully merged branches
+	sweep = !git-sweep
+	# provide encryption for repositories
+	crypt = !git-crypt
+  # list only untracked files
+  untracked = ls-files --others --exclude-standard
 
 [github]
     user = nate-wilkins
@@ -44,6 +47,9 @@ commit = yellow reverse
 [rebase]
     autosquash = true
     autostash = true
+
+[branch "master"]
+	mergeoptions = --ff-only
 
 [tag]
     sort = version:refname
