@@ -4,6 +4,7 @@
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
+alias open='xdg-open'
 
 # network
 alias internet="ping 8.8.8.8"
