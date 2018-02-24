@@ -33,7 +33,6 @@ fresh-options                                                  --bin
   fresh           xero/dotfiles      bin/bin/epoch             # get seconds since epoch.
   fresh           xero/dotfiles      bin/bin/sysinfo           # get sysinfo.
   fresh        sapegin/dotfiles          bin/semver            # manipulate semver strings.
-  fresh        sapegin/dotfiles          bin/nyan              # prints ASCII nyan cat.
   fresh        sapegin/dotfiles          bin/git-github        # synchronize current repository with github.
   fresh           voku/dotfiles          bin/matrix.sh         # prints a matrix-ish display.
   fresh                                  bin/git-safe-clone.sh # clone or pull a repository.
@@ -42,18 +41,14 @@ fresh-options
 
 # -[ config ]---------|---------------------|----------------- #
 # /
-[ -f ~/.bashrc ] && rm ~/.bashrc
-fresh-options                                                  --file=~/.bashrc
-  fresh     freshshell/fresh         contrib/source-build.sh   # [fresh (dotfile manager)](https://freshshell.com/)
-  fresh                                      .bashrc           # [bash](https://www.gnu.org/software/bash/)
+[ -f ~/.zshrc ] && rm ~/.zshrc
+fresh-options                                                  --file=~/.zshrc
+  fresh                                      .zshrc
 
-[ -f ~/.bash_logout ] && rm ~/.bash_logout
-fresh-options                                                  --file=~/.bash_logout
-  fresh                                      .bash_logout      # [bash](https://www.gnu.org/software/bash/)
-
-[ -f ~/.dircolors ] && rm ~/.dircolors
-fresh-options                                                  --file=~/.dircolors
-  fresh                                      .dircolors
+mkdir -p ~/.config/polybar
+[ -f ~/.config/polybar/config ] && rm ~/.config/polybar/config
+fresh-options                                                  --file=~/.config/polybar/config
+  fresh                                      .polybar
 
 [ -f ~/.curlrc ] && rm ~/.curlrc
 fresh-options                                                  --file=~/.curlrc
@@ -76,18 +71,3 @@ fresh-options                                                  --file=~/.spacema
   fresh                                      .spacemacs        # [spacemacs](https://github.com/syl20bnr/spacemacs)
 
 fresh-options
-
-
-# -[ shell ]----------|---------------------|----------------- #
-# /
-fresh         foobacca/dotfiles        shell/aliases-dir
-fresh           nojhan/liquidprompt          liquidprompt
-fresh                                  shell/aliases.sh
-fresh                                  shell/exports.sh
-
-# -[ completion ]-----|---------------------|----------------- #
-# /
-fresh         foobacca/dotfiles                    bash/completion
-fresh       freshshell/fresh         contrib/completion/fresh-completion.bash
-fresh              git/git           contrib/completion/git-completion.bash
-fresh        bobthecow/git-flow-completion              git-flow-completion.bash

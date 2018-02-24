@@ -9,7 +9,7 @@ Dotfiles for my development environment. Managed with [fresh]!
 ```
 git clone https://github.com/nate-wilkins/.dotfiles ~/.dotfiles
 chmod +x ~/.dotfiles/install.sh
-sudo bash ~/.dotfiles/install.sh nate-wilkins
+sudo sh ~/.dotfiles/install.sh nate-wilkins
 ```
 
 ## *Note*

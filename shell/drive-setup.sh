@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 DRIVE=$1
 MOUNT_PATH=/mnt/$1
 
