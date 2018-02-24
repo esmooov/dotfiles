@@ -7,35 +7,36 @@ fresh freshshell/fresh bin/fresh --bin
 # -[ bin ]---------------------------------------------------- #
 # /
 fresh-options                                                  --bin
-  fresh       pengwynn/dotfiles          bin/e                 # open editor
-  fresh       pengwynn/dotfiles          bin/git-churn         # git repository churn
-  fresh       pengwynn/dotfiles          bin/git-outgoing      # show commits on current branch not upstream
-  fresh       pengwynn/dotfiles          bin/git-pr            # open github pr page for current branch
-  fresh       pengwynn/dotfiles          bin/git-contributors  # generate list of contributors for repository
-  fresh       pengwynn/dotfiles          bin/git-sweep         # cleanup fully merged branches
-  fresh       pengwynn/dotfiles          bin/git-rel           # show relationship between current branch and <ref>
-  fresh       pengwynn/dotfiles          bin/spark             # generate sparklines
-  fresh       pengwynn/dotfiles          bin/addr              # show IPv4 address for interface <if>
-  fresh     jasoncodes/dotfiles          bin/pidof             # get pidof application
-  fresh        twe4ked/catacomb          bin/catacomb          # encrypt content using public keys from github
-  fresh        twe4ked/dotfiles          bin/ghu               # open common repository links (issues, pulls, wiki)
-  fresh        defunkt/repl              bin/repl              # create an interactive repl for any command
-  fresh       thenigan/git-diffall           git-diffall       # dif entire directories
-  fresh         cowboy/dotfiles          bin/count-commits     # count git commits accross multiple repositories
-  fresh         cowboy/dotfiles          bin/isip              # get all bound IPs
-  fresh         cowboy/dotfiles          bin/pid               # list all running processes
-  fresh         cowboy/dotfiles          bin/scan              # port scan one machine or everything on subnet(s)
-  fresh syntax-samurai/gitio                 gitio             # create short / vanity github urls
-  fresh           xero/dotfiles      fun/bin/emote             # prints ASCII emoji
-  fresh           xero/dotfiles      fun/bin/food              # prints ASCII food
-  fresh           xero/dotfiles      fun/bin/ghosts            # prints ASCII ghost
-  fresh           xero/dotfiles      fun/bin/rain              # prints ASCII rain
-  fresh           xero/dotfiles      bin/bin/epoch             # get seconds since epoch
-  fresh           xero/dotfiles      bin/bin/sysinfo           # get sysinfo
-  fresh        sapegin/dotfiles          bin/semver            # manipulate semver strings
-  fresh        sapegin/dotfiles          bin/nyan              # prints ASCII nyan cat
-  fresh        sapegin/dotfiles          bin/git-github        # synchronize current repository with github
-  fresh           voku/dotfiles          bin/matrix.sh         # prints a matrix-ish display
+  fresh       pengwynn/dotfiles          bin/e                 # open editor.
+  fresh       pengwynn/dotfiles          bin/git-churn         # git repository churn.
+  fresh       pengwynn/dotfiles          bin/git-outgoing      # show commits on current branch not upstream.
+  fresh       pengwynn/dotfiles          bin/git-pr            # open github pr page for current branch.
+  fresh       pengwynn/dotfiles          bin/git-contributors  # generate list of contributors for repository.
+  fresh       pengwynn/dotfiles          bin/git-sweep         # cleanup fully merged branches.
+  fresh       pengwynn/dotfiles          bin/git-rel           # show relationship between current branch and <ref>.
+  fresh       pengwynn/dotfiles          bin/spark             # generate sparklines.
+  fresh       pengwynn/dotfiles          bin/addr              # show IPv4 address for interface <if>.
+  fresh     jasoncodes/dotfiles          bin/pidof             # get pidof application.
+  fresh        twe4ked/catacomb          bin/catacomb          # encrypt content using public keys from github.
+  fresh        twe4ked/dotfiles          bin/ghu               # open common repository links (issues, pulls, wiki).
+  fresh        defunkt/repl              bin/repl              # create an interactive repl for any command.
+  fresh       thenigan/git-diffall           git-diffall       # dif entire directories.
+  fresh         cowboy/dotfiles          bin/count-commits     # count git commits accross multiple repositories.
+  fresh         cowboy/dotfiles          bin/isip              # get all bound IPs.
+  fresh         cowboy/dotfiles          bin/pid               # list all running processes.
+  fresh         cowboy/dotfiles          bin/scan              # port scan one machine or everything on subnet(s).
+  fresh syntax-samurai/gitio                 gitio             # create short / vanity github urls.
+  fresh           xero/dotfiles      fun/bin/emote             # prints ASCII emoji.
+  fresh           xero/dotfiles      fun/bin/food              # prints ASCII food.
+  fresh           xero/dotfiles      fun/bin/ghosts            # prints ASCII ghost.
+  fresh           xero/dotfiles      fun/bin/rain              # prints ASCII rain.
+  fresh           xero/dotfiles      bin/bin/epoch             # get seconds since epoch.
+  fresh           xero/dotfiles      bin/bin/sysinfo           # get sysinfo.
+  fresh        sapegin/dotfiles          bin/semver            # manipulate semver strings.
+  fresh        sapegin/dotfiles          bin/nyan              # prints ASCII nyan cat.
+  fresh        sapegin/dotfiles          bin/git-github        # synchronize current repository with github.
+  fresh           voku/dotfiles          bin/matrix.sh         # prints a matrix-ish display.
+  fresh                                  bin/git-safe-clone.sh # clone or pull a repository.
 fresh-options
 
 
