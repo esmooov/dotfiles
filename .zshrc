@@ -1,4 +1,6 @@
-#!/usr/bin/env zsh
+
+
+  #!/usr/bin/env zsh
 
 # /-------------------------\ #
 #<-[    dotfiles/.zshrc    ]->#
@@ -32,7 +34,11 @@ antigen bundle nyan
 antigen bundle emoji
 
 antigen bundle lukechilds/zsh-nvm
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle ascii-soup/zsh-url-highlighter
 
 # - theme
 antigen theme halfo/lambda-mod-zsh-theme

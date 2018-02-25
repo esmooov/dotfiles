@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# -[ env variables ] ----------------------------------------- #
+# -[ env ] --------------------------------------------------- #
 # /
 export GITHUB_USER=nate-wilkins
 export EDITOR=emacs

@@ -19,6 +19,8 @@ if [[ "$1" == "" ]]; then
     exit 1
 fi
 
+# -[ fresh ]-------------------------------------------------- #
+# /
 [ -d /home/$1/.fresh ]   && rm -rf /home/$1/.fresh
 [ -f /home/$1/.freshrc ] && rm -f  /home/$1/.freshrc
 find /home/$1/ -lname "/home/$1/.fresh/*" -delete

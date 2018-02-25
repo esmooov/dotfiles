@@ -45,6 +45,16 @@ fresh-options
 fresh-options                                                  --file=~/.zshrc
   fresh                                      .zshrc
 
+[ -f ~/.xinitrc ] && rm ~/.xinitrc
+fresh-options                                                  --file=~/.xinitrc
+  fresh                                      .xinitrc
+# add xinitrc to path.
+ln -s ~/.xinitrc /usr/bin/xinitrc
+
+[ -f ~/.sxhkdrc ] && rm ~/.sxhkdrc
+fresh-options                                                  --file=~/.sxhkdrc
+  fresh                                      .sxhkdrc
+
 mkdir -p ~/.config/polybar
 [ -f ~/.config/polybar/config ] && rm ~/.config/polybar/config
 fresh-options                                                  --file=~/.config/polybar/config
@@ -71,3 +81,7 @@ fresh-options                                                  --file=~/.spacema
   fresh                                      .spacemacs        # [spacemacs](https://github.com/syl20bnr/spacemacs)
 
 fresh-options
+
+# -[ shell ]----------|---------------------|----------------- #
+fresh                                  shell/aliases.sh
+fresh                                  shell/exports.sh
