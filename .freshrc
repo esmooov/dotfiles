@@ -49,7 +49,6 @@ fresh-options                                                  --file=~/.zshrc
 fresh-options                                                  --file=~/.xinitrc
   fresh                                      .xinitrc
 # add xinitrc to path.
-ln -s ~/.xinitrc /usr/bin/xinitrc
 
 [ -f ~/.sxhkdrc ] && rm ~/.sxhkdrc
 fresh-options                                                  --file=~/.sxhkdrc
