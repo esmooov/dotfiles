@@ -57,5 +57,25 @@ eval $(keychain --eval github-god_rsa)
 # - key bindings
 # <Shift+Tab> :: reverse menu select.
 bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+# - dotfile functions
+compdef \
+    '_arguments "1: :(zsh sxhkd fresh bspwm curl editor gem git polybar spacemacs)"' \
+    conf
+conf() {
+    case $1 in
+        zsh)       $EDITOR ~/.dotfiles/.zshrc ;;
+        sxhkd)     $EDITOR ~/.dotfiles/.sxhkdrc;;
+        fresh)     $EDITOR ~/.dotfiles/.freshrc;;
+        bspwm)     $EDITOR ~/.dotfiles/.bspwmrc;;
+        curl)      $EDITOR ~/.dotfiles/.curlrc;;
+        editor)    $EDITOR ~/.dotfiles/.editorconfig;;
+        gem)       $EDITOR ~/.dotfiles/.gemrc;;
+        git)       $EDITOR ~/.dotfiles/.gitconfig;;
+        polybar)   $EDITOR ~/.dotfiles/.polybar;;
+        spacemacs) $EDITOR ~/.dotfiles/.spacemacs;;
+        *)         $EDITOR ~/.dotfiles;;
+    esac
+}
 # \
 # -[ other ]-------------------------------------------------- #
