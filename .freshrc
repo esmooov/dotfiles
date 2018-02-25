@@ -41,19 +41,19 @@ fresh-options
 
 # -[ config ]---------|---------------------|----------------- #
 # /
-[ -f ~/.zshrc ] && rm ~/.zshrc
+[ -f ~/.zshrc ] && rm -f ~/.zshrc
 fresh-options                                                  --file=~/.zshrc
   fresh                                      .zshrc
 
-[ -f ~/.xinitrc ] && rm ~/.xinitrc
+[ -f ~/.xinitrc ] && rm -f ~/.xinitrc
 fresh-options                                                  --file=~/.xinitrc
   fresh                                      .xinitrc
 
-[ -f ~/.bspwmrc ] && rm ~/.bspwmrc
+[ -f ~/.bspwmrc ] && rm -f ~/.bspwmrc
 fresh-options                                                  --file=~/.bspwmrc
   fresh                                      .bspwmrc
 
-[ -f ~/.sxhkdrc ] && rm ~/.sxhkdrc
+[ -f ~/.sxhkdrc ] && rm -f ~/.sxhkdrc
 fresh-options                                                  --file=~/.sxhkdrc
   fresh                                      .sxhkdrc
 
@@ -62,23 +62,23 @@ mkdir -p ~/.config/polybar
 fresh-options                                                  --file=~/.config/polybar/config
   fresh                                      .polybar
 
-[ -f ~/.curlrc ] && rm ~/.curlrc
+[ -f ~/.curlrc ] && rm -f ~/.curlrc
 fresh-options                                                  --file=~/.curlrc
   fresh                                      .curlrc           # [curl](https://github.com/curl/curl)
 
-[ -f ~/.editorconfig ] && rm ~/.editorconfig
+[ -f ~/.editorconfig ] && rm -f ~/.editorconfig
 fresh-options                                                  --file=~/.editorconfig
   fresh                                      .editorconfig     # [editorconfig](http://editorconfig.org/)
 
-[ -f ~/.gemrc ] && rm ~/.gemrc
+[ -f ~/.gemrc ] && rm -f ~/.gemrc
 fresh-options                                                  --file=~/.gemrc
   fresh                                      .gemrc            # [ruby gem](https://rubygems.org/)
 
-[ -f ~/.gitconfig ] && rm ~/.gitconfig
+[ -f ~/.gitconfig ] && rm -f ~/.gitconfig
 fresh-options                                                  --file=~/.gitconfig
   fresh                                      .gitconfig        # [git (scm)](https://git-scm.com/)
 
-[ -f ~/.spacemacs ] && rm ~/.spacemacs
+[ -f ~/.spacemacs ] && rm -f ~/.spacemacs
 fresh-options                                                  --file=~/.spacemacs
   fresh                                      .spacemacs        # [spacemacs](https://github.com/syl20bnr/spacemacs)
 
