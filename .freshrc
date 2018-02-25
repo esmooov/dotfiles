@@ -48,7 +48,10 @@ fresh-options                                                  --file=~/.zshrc
 [ -f ~/.xinitrc ] && rm ~/.xinitrc
 fresh-options                                                  --file=~/.xinitrc
   fresh                                      .xinitrc
-# add xinitrc to path.
+
+[ -f ~/.bspwmrc ] && rm ~/.bspwmrc
+fresh-options                                                  --file=~/.bspwmrc
+  fresh                                      .bspwmrc
 
 [ -f ~/.sxhkdrc ] && rm ~/.sxhkdrc
 fresh-options                                                  --file=~/.sxhkdrc
