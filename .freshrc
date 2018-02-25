@@ -35,6 +35,8 @@ fresh-options                                                  --bin
   fresh        sapegin/dotfiles          bin/semver            # manipulate semver strings.
   fresh        sapegin/dotfiles          bin/git-github        # synchronize current repository with github.
   fresh           voku/dotfiles          bin/matrix.sh         # prints a matrix-ish display.
+
+  fresh                                  bin/perm.sh           # get user and group permissions.
   fresh                                  bin/git-safe-clone.sh # clone or pull a repository.
 fresh-options
 
@@ -45,12 +47,12 @@ fresh-options
 fresh-options                                                  --file=~/.zshrc
   fresh                                      .zshrc
 
-[ -f ~/.bspwmrc ] && rm -f ~/.bspwmrc
-fresh-options                                                  --file=~/.bspwmrc
+[ -f ~/.config/bspwm/bspwmrc ] && rm -f ~/.config/bspwm/bspwmrc
+fresh-options                                                  --file=~/.config/bspwm/bspwmrc
   fresh                                      .bspwmrc
 
-[ -f ~/.sxhkdrc ] && rm -f ~/.sxhkdrc
-fresh-options                                                  --file=~/.sxhkdrc
+[ -f ~/.config/sxhkd/sxhkdrc ] && rm -f ~/.config/sxhkd/sxhkdrc
+fresh-options                                                  --file=~/.config/sxhkd/sxhkdrc
   fresh                                      .sxhkdrc
 
 mkdir -p ~/.config/polybar
