@@ -47,5 +47,9 @@ antigen apply
 # /
 # - keychain
 eval $(keychain --eval github-god_rsa)
+
+# - key bindings
+# <Shift+Tab> :: reverse menu select.
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 # \
 # -[ other ]-------------------------------------------------- #
