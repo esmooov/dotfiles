@@ -1,6 +1,6 @@
 #! /bin/sh
 
-sxhkd &
+sxhkd -c ~/.sxhkdrc 2>&1 > /tmp/sxhkd.log &
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 

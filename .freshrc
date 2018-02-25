@@ -45,10 +45,6 @@ fresh-options
 fresh-options                                                  --file=~/.zshrc
   fresh                                      .zshrc
 
-[ -f ~/.xinitrc ] && rm -f ~/.xinitrc
-fresh-options                                                  --file=~/.xinitrc
-  fresh                                      .xinitrc
-
 [ -f ~/.bspwmrc ] && rm -f ~/.bspwmrc
 fresh-options                                                  --file=~/.bspwmrc
   fresh                                      .bspwmrc
