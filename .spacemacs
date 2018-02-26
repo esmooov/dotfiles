@@ -116,7 +116,8 @@ values."
    dotspacemacs-scratch-mode 'text-mode
    ;; Press <SPC> T n to cycle to the next theme in the list.
    dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+                         spacemacs-light
+                         base16-harmonic16-dark)
    dotspacemacs-colorize-cursor-according-to-state t
    dotspacemacs-default-font '("Source Code Pro"
                                :size 13
