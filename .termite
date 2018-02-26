@@ -1,0 +1,10 @@
+[options]
+font = Monospace 9
+font = DejaVu Sans Mono 9
+mouse_autohide = true
+clickable_url = true
+browser = chromium
+allow_bold = true
+dynamic_title = true
+scrollback_lines = 10000
+cursor_blink = system

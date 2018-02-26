@@ -63,10 +63,17 @@ fresh-options
 fresh-options                                                  --file=~/.zshrc
   fresh                                      .zshrc
 
+mkdir -p ~/.config/termite
+[ -f ~/.config/termite/config ] && rm -f ~/.config/termite/config
+fresh-options                                                  --file=~/.config/termite/config
+  fresh                                      .termite
+
+mkdir -p ~/.config/bspwm
 [ -f ~/.config/bspwm/bspwmrc ] && rm -f ~/.config/bspwm/bspwmrc
 fresh-options                                                  --file=~/.config/bspwm/bspwmrc
   fresh                                      .bspwmrc
 
+mkdir -p ~/.config/sxhkd
 [ -f ~/.config/sxhkd/sxhkdrc ] && rm -f ~/.config/sxhkd/sxhkdrc
 fresh-options                                                  --file=~/.config/sxhkd/sxhkdrc
   fresh                                      .sxhkdrc
