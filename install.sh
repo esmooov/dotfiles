@@ -19,6 +19,21 @@ if [[ "$1" == "" ]]; then
     exit 1
 fi
 
+
+# -[ dependencies ]------------------------------------------- #
+# /
+# - nodejs
+if hash npm 2>/dev/null; then
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+    chmod +x "/home/$1/.nvm/nvm.sh"
+    . "/home/$1/.nvm/nvm.sh"
+    nvm install node
+fi
+
+# - base16-builder
+npm install --global base16-builder
+
+
 # -[ fresh ]-------------------------------------------------- #
 # /
 [ -d /home/$1/.fresh ]   && rm -rf /home/$1/.fresh
