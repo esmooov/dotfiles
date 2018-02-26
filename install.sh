@@ -4,6 +4,17 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
+# uses base16-builder
+#
+# schemes
+# - solarized
+# - codeschool
+# - flat
+# - darktooth
+DOTFILES_SCHEME=harmonic
+DOTFILES_THEME=dark
+
+
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Unable to proceed. Script must be run as root."
     echo "  sudo bash setup.sh"
@@ -33,6 +44,30 @@ fi
 # - base16-builder
 npm install --global base16-builder
 
+# -[ theme ]-------------------------------------------------- #
+# /
+[ -d .theme/ ] && rm -rf tmp/
+mkdir -p .theme/
+
+# - spacemacs
+mkdir -p ~/.spacemacs.d/
+[ -f ~/.spacemacs.d/my-theme.el ] && rm -f ~/.spacemacs.d/my-theme.el
+base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > ~/.spacemacs.d/my-theme.el
+
+# - bspwm
+BSPWM_COLOR=$(base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm)
+echo $BSPWM_COLOR               >                                 .theme/bspwm.color.sh
+
+# - dmenu
+DMENU_COLOR=$(base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
+echo alias dmenu="$DMENU_COLOR" >                                 .theme/dmenu.color-shell.sh
+
+# - termite
+TERMITE_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite)
+echo $TERMITE_COLOR             >                                 .theme/termite.color
+
+# TODO: chrome-devtools :: find config location
+#       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
 
 # -[ fresh ]-------------------------------------------------- #
 # /
