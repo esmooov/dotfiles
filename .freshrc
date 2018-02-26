@@ -131,5 +131,9 @@ fresh                                  shell/exports.sh
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
-# TODO: gnome-terminal :: maybe?
-# TDOO: termite
+
+# - termite
+TERMITE_COLOR=$(base16-builder -s harmonic -b dark -t termite)
+echo $TERMITE_COLOR > tmp/termite.color
+fresh-options                                                   --file=~/.config/termite/config
+  fresh                                   tmp/termite.color
