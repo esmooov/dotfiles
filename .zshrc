@@ -48,6 +48,14 @@ antigen apply
 # \
 # -[ antigen ]------------------------------------------------ #
 
+# -[ bindings ]----------------------------------------------- #
+# /
+# <Shift+Tab> :: reverse menu select.
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
+# \
+# ------------------------------------------------------------ #
+
 
 # -[ other ]-------------------------------------------------- #
 # /
@@ -59,10 +67,6 @@ source /etc/profile.d/vte-*.sh
 
 # - keychain
 eval $(keychain --eval github-god_rsa)
-
-# - key bindings
-# <Shift+Tab> :: reverse menu select.
-bindkey -M menuselect '^[[Z' reverse-menu-complete
 
 # - dotfile functions
 compdef \
