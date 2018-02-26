@@ -1,8 +1,12 @@
 #! /bin/sh
 
-sxhkd -c ~/.sxhkdrc 2>&1 > /tmp/sxhkd.log &
+# kill all the bspc processes first.
+kill -9 $(ps aux | grep bspc | sed 's/\s\+/ /g' | cut -d' ' -f2 | xargs)
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+sxhkd &
+urxvt -e /bin/zsh &
+
+bspc monitor -d I II III
 
 bspc config border_width         2
 bspc config window_gap          12
