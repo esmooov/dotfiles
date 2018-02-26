@@ -2,11 +2,25 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
-fresh freshshell/fresh bin/fresh --bin
+# uses base16-builder
+#
+# other schemes
+# - solarized
+# - codeschool
+# - flat
+# - darktooth
+DOTFILES_SCHEME=harmonic
+DOTFILES_THEME=dark
+
+[ -d tmp/ ] && rm -rf tmp/
+
 
 # -[ bin ]---------------------------------------------------- #
 # /
 fresh-options                                                  --bin
+  fresh     freshshell/fresh             bin/fresh
+
+  # online
   fresh       pengwynn/dotfiles          bin/e                 # open editor.
   fresh       pengwynn/dotfiles          bin/git-churn         # git repository churn.
   fresh       pengwynn/dotfiles          bin/git-outgoing      # show commits on current branch not upstream.
@@ -36,6 +50,8 @@ fresh-options                                                  --bin
   fresh        sapegin/dotfiles          bin/git-github        # synchronize current repository with github.
   fresh           voku/dotfiles          bin/matrix.sh         # prints a matrix-ish display.
 
+  # local
+  fresh                                  bin/trim.sh           # trim leading and trailing whitespace.
   fresh                                  bin/perm.sh           # get user and group permissions.
   fresh                                  bin/git-safe-clone.sh # clone or pull a repository.
 fresh-options
@@ -79,9 +95,33 @@ fresh-options                                                  --file=~/.gitconf
 [ -f ~/.spacemacs ] && rm -f ~/.spacemacs
 fresh-options                                                  --file=~/.spacemacs
   fresh                                      .spacemacs        # [spacemacs](https://github.com/syl20bnr/spacemacs)
-
 fresh-options
 
+
 # -[ shell ]----------|---------------------|----------------- #
+# /
 fresh                                  shell/aliases.sh
 fresh                                  shell/exports.sh
+
+# -[ theme ]----------|---------------------|----------------- #
+# /
+# - spacemacs
+mkdir -p ~/.spacemacs.d/
+[ -f ~/.spacemacs.d/my-theme.el ] && rm -f ~/.spacemacs.d/my-theme.el
+base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > ~/.spacemacs.d/my-theme.el
+
+# - bspwm
+BSPWM_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm)
+echo $BSPWM_COLOR               >        tmp/bspwm-color.sh
+fresh-options                                                  --file=~/.config/bspwm/bspwmrc
+  fresh                                  tmp/bspwm-color.sh
+
+# - dmenu
+DMENU_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
+echo alias dmenu="$DMENU_COLOR" >        tmp/dmenu-alias.sh
+fresh-options
+  fresh                                  tmp/dmenu-alias.sh
+
+# TODO: chrome-devtools :: find config location
+#       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
+# TODO: gnome-terminal :: maybe?

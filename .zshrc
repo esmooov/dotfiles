@@ -51,6 +51,9 @@ antigen apply
 
 # -[ other ]-------------------------------------------------- #
 # /
+# - fresh
+emulate sh -c "`cat ~/.fresh/build/shell.sh | tail -n +2`"
+
 # - keychain
 eval $(keychain --eval github-god_rsa)
 

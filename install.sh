@@ -29,3 +29,6 @@ cp /home/$1/.dotfiles/.freshrc /home/$1/.freshrc
 
 FRESH_LOCAL_SOURCE=$1/dotfiles
 runuser -l $1 -c 'source <(curl -sL https://get.freshshell.com)'
+
+# sourced in .zshrc
+chmod +x /home/$1/.fresh/build/shell.sh

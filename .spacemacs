@@ -82,6 +82,9 @@
      emojify
      google-this
 
+     ;; my-theme
+     (my-theme :fetcher file :path ~/.spacemacs-theme.el)
+
      ;; https://github.com/zk-phi/symon/
      (symon :repo "https://github.com/zk-phi/symon/" :fetcher github)
 
