@@ -106,22 +106,23 @@ fresh                                  shell/exports.sh
 # -[ theme ]----------|---------------------|----------------- #
 # /
 # - spacemacs
-mkdir -p ~/.spacemacs.d/
-[ -f ~/.spacemacs.d/my-theme.el ] && rm -f ~/.spacemacs.d/my-theme.el
-base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > ~/.spacemacs.d/my-theme.el
+#mkdir -p ~/.spacemacs.d/
+#[ -f ~/.spacemacs.d/my-theme.el ] && rm -f ~/.spacemacs.d/my-theme.el
+#base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > ~/.spacemacs.d/my-theme.el
 
 # - bspwm
-BSPWM_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm)
-echo $BSPWM_COLOR               >        tmp/bspwm-color.sh
-fresh-options                                                  --file=~/.config/bspwm/bspwmrc
-  fresh                                  tmp/bspwm-color.sh
+#BSPWM_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm)
+#echo $BSPWM_COLOR               >        tmp/bspwm-color.sh
+#fresh-options                                                  --file=~/.config/bspwm/bspwmrc
+#  fresh                                  tmp/bspwm-color.sh
 
 # - dmenu
-DMENU_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
-echo alias dmenu="$DMENU_COLOR" >        tmp/dmenu-alias.sh
-fresh-options
-  fresh                                  tmp/dmenu-alias.sh
+#DMENU_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
+#echo alias dmenu="$DMENU_COLOR" >        tmp/dmenu-alias.sh
+#fresh-options
+#  fresh                                  tmp/dmenu-alias.sh
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
 # TODO: gnome-terminal :: maybe?
+# TDOO: termite
