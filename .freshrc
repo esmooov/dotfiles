@@ -2,7 +2,18 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
+# -[ vars ]--------------------------------------------------- #
+# /
+echo "                                             "
+echo "< starting fresh >                           "
+echo "                                             "
 
+source ~/.freshvars
+DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED:=no}
+
+echo "[vars]                                       "
+echo "--skip-encrypted :: $DOTFILES_SKIP_ENCRYPTED "
+echo "                                             "
 
 # -[ bin ]---------------------------------------------------- #
 # /
@@ -74,7 +85,7 @@ mkdir -p ~/.config/polybar
 fresh-options                                                  --file=~/.config/polybar/config
   fresh                                      .polybar
 
-if [ $SKIP_ENCRYPTED != "yes" ]; then
+if [ "$DOTFILES_SKIP_ENCRYPTED" != "yes" ]; then
   mkdir -p ~/.config/asciinema
   [ -f ~/.config/asciinema/config ] && rm -f ~/.config/asciinema/config
   fresh-options                                                --file=~/.config/asciinema/config
