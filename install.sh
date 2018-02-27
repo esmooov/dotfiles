@@ -50,9 +50,10 @@ npm install --global base16-builder
 mkdir -p .theme/
 
 # - spacemacs
-mkdir -p ~/.spacemacs.d/
-[ -f ~/.spacemacs.d/my-theme.el ] && rm -f ~/.spacemacs.d/my-theme.el
-base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > ~/.spacemacs.d/my-theme.el
+mkdir -p ~/.spacemacs.d/private/local/base16-$($DOTFILES_SCHEME)16-$($DOTFILES_THEME)-theme
+SPACEMACS_THEME=~/.spacemacs.d/private/local/base16-$($DOTFILES_SCHEME)16-$($DOTFILES_THEME)-theme/base16-$($DOTFILES_SCHEME)16-$($DOTFILES_THEME).el
+[ -f $SPACEMACS_THEME ] && rm -f $SPACEMACS_THEME
+base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME
 
 # - bspwm
 base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > .theme/bspwm.color.sh

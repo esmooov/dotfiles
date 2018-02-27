@@ -11,7 +11,7 @@
    ;; options: `all', `unused', `nil'
    dotspacemacs-enable-lazy-installation 'all
    dotspacemacs-ask-for-lazy-installation t
-   dotspacemacs-configuration-layer-path '()
+   dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    dotspacemacs-delete-orphan-packages t
    dotspacemacs-configuration-layers
    '(
@@ -82,9 +82,6 @@
      emojify
      google-this
 
-     ;; my-theme
-     (my-theme :fetcher file :path ~/.spacemacs-theme.el)
-
      ;; https://github.com/zk-phi/symon/
      (symon :repo "https://github.com/zk-phi/symon/" :fetcher github)
 
@@ -102,6 +99,7 @@ This function is called at the very startup of Spacemacs initialization
 before layers configuration.
 You should not put any user code in there besides modifying the variable
 values."
+
   (setq-default
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
@@ -115,12 +113,15 @@ values."
    dotspacemacs-startup-buffer-responsive t
    dotspacemacs-scratch-mode 'text-mode
    ;; Press <SPC> T n to cycle to the next theme in the list.
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light
-                         base16-harmonic16-dark)
+   dotspacemacs-themes'(spacemacs-dark
+                        spacemacs-light)
+                        ;; [local theme support](spacemacs/issues/7373)
+                        ;; (base16-harmonic16-dark :location local)
    dotspacemacs-colorize-cursor-according-to-state t
+   ;; Fonts
+   ;; - Source Code Pro
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -149,7 +150,7 @@ values."
    dotspacemacs-which-key-delay 0.2
    dotspacemacs-which-key-position 'bottom
    dotspacemacs-loading-progress-bar t
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    dotspacemacs-fullscreen-use-non-native nil
    dotspacemacs-maximized-at-startup nil
    dotspacemacs-active-transparency 95
@@ -172,8 +173,7 @@ values."
    buffer-file-coding-system 'utf-8-unix
 
    ;; Line length.
-   fill-column 80
-   ))
+   fill-column 80))
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -214,13 +214,11 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  ;; add custom plugins directory to load-path.
-  ;;(push "~/.spacemacs-plugins/" load-path)
-
   (setq-default
    deft-directory "~/Dropbox/Notes"
    deft-extensions '("md", "txt"))
 
+  (spacemacs/toggle-fill-column-indicator-on)
 
   ;; monitor the system clipboard and add any changes to the kill ring.
   (add-to-list 'after-init-hook 'clipmon-mode-start)

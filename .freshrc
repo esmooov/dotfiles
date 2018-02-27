@@ -56,11 +56,13 @@ mkdir -p ~/.config/termite
 [ -f ~/.config/termite/config ] && rm -f ~/.config/termite/config
 fresh-options                                                  --file=~/.config/termite/config
   fresh                                      .termite
+  fresh                               .theme/termite.color
 
 mkdir -p ~/.config/bspwm
 [ -f ~/.config/bspwm/bspwmrc ] && rm -f ~/.config/bspwm/bspwmrc
 fresh-options                                                  --file=~/.config/bspwm/bspwmrc
   fresh                                      .bspwmrc
+  fresh                               .theme/bspwm.color.sh
 
 mkdir -p ~/.config/sxhkd
 [ -f ~/.config/sxhkd/sxhkdrc ] && rm -f ~/.config/sxhkd/sxhkdrc
@@ -98,17 +100,4 @@ fresh-options
 # /
 fresh                                  shell/aliases.sh
 fresh                                  shell/exports.sh
-
-# -[ theme ]----------|---------------------|----------------- #
-# /
-# - bspwm
-fresh-options                                                  --file=~/.config/bspwm/bspwmrc
-  fresh                               .theme/bspwm.color.sh
-
-# - dmenu
-fresh-options
-  fresh                               .theme/dmenu.color-shell.sh
-
-# - termite
-fresh-options                                                   --file=~/.config/termite/config
-  fresh                               .theme/termite.color
+fresh                                 .theme/dmenu.color-shell.sh
