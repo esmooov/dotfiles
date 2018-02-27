@@ -4,6 +4,8 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
+$ROOT_DIR=`dirname $0`
+
 # -[ root check ]--------------------------------------------- #
 # /
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -91,24 +93,29 @@ npm install --global base16-builder
 
 # -[ theme ]-------------------------------------------------- #
 # /
-[ -d .theme/ ] && rm -rf tmp/
-mkdir -p .theme/
+[ -d $ROOT_DIR/.theme/ ] && rm -rf $ROOT_DIR/.theme/
+mkdir -p $ROOT_DIR/.theme/
 
 # - spacemacs
+# TODO: should output to ROOT_DIR and freshen with freshrc.
+#       also need ability for spacemacs to support custom.
 mkdir -p ~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme
 SPACEMACS_THEME=~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
 [ -f $SPACEMACS_THEME ] && rm -f $SPACEMACS_THEME
 base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME
 
 # - bspwm
-base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > .theme/bspwm.color.sh
+[ -f $ROOT_DIR/.theme/bspwm.color.sh ] && rm -f $ROOT_DIR/.theme/bspwm.color.sh
+base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh
 
 # - dmenu
+[ -f $ROOT_DIR/.theme/dmenu.color-shell.sh ] && rm -f $ROOT_DIR/.theme/dmenu.color-shell.sh
 DMENU_COLOR=$(base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
-echo alias dmenu="$DMENU_COLOR" >                                  .theme/dmenu.color-shell.sh
+echo alias dmenu="$DMENU_COLOR" >                                  $ROOT_DIR/.theme/dmenu.color-shell.sh
 
 # - termite
-base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > .theme/termite.color
+[ -f $ROOT_DIR/.theme/termite.color ] && rm -f $ROOT_DIR/.theme/termite.color
+base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
@@ -117,11 +124,13 @@ base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > .theme/termit
 # /
 [ -d /home/$DOTFILES_USER/.fresh ]   && rm -rf /home/$DOTFILES_USER/.fresh
 [ -f /home/$DOTFILES_USER/.freshrc ] && rm -f  /home/$DOTFILES_USER/.freshrc
+# cleanup fresh symlinks.
 find /home/$DOTFILES_USER/ -lname /home/$DOTFILES_USER/.fresh/* -delete
 
-cp /home/$DOTFILES_USER/.dotfiles/.freshrc /home/$DOTFILES_USER/.freshrc
+# make freshrc available for fresh.
+cp $ROOT_DIR/.freshrc /home/$DOTFILES_USER/.freshrc
 
-# write variables for fresh
+# write variables for fresh.
 [ -f /home/$DOTFILES_USER/.freshvars ] && rm -f /home/$DOTFILES_USER/.freshvars
 echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > /home/$DOTFILES_USER/.freshvars
 chmod +x /home/$DOTFILES_USER/.freshvars
