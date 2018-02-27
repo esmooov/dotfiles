@@ -55,16 +55,14 @@ mkdir -p ~/.spacemacs.d/
 base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > ~/.spacemacs.d/my-theme.el
 
 # - bspwm
-BSPWM_COLOR=$(base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm)
-echo $BSPWM_COLOR               >                                 .theme/bspwm.color.sh
+base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > .theme/bspwm.color.sh
 
 # - dmenu
 DMENU_COLOR=$(base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
-echo alias dmenu="$DMENU_COLOR" >                                 .theme/dmenu.color-shell.sh
+echo alias dmenu="$DMENU_COLOR" >                                  .theme/dmenu.color-shell.sh
 
 # - termite
-TERMITE_COLOR=$(base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite)
-echo $TERMITE_COLOR             >                                 .theme/termite.color
+base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > .theme/termite.color
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
