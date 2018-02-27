@@ -4,9 +4,18 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
-# uses base16-builder
+# -[ root check ]--------------------------------------------- #
+# /
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Unable to proceed. Script must be run as root."
+    echo "  sudo bash setup.sh"
+    exit -2
+fi
+
+# -[ configuration ]------------------------------------------ #
+# /
 #
-# schemes
+# base16-builder schemes
 # - solarized
 # - codeschool
 # - flat
@@ -14,21 +23,37 @@
 DOTFILES_SCHEME=harmonic
 DOTFILES_THEME=dark
 
-
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "Unable to proceed. Script must be run as root."
-    echo "  sudo bash setup.sh"
-    exit -2
-fi
-
-if [[ "$1" == "" ]]; then
-    echo "Usage:                            "
-    echo "  sudo bash setup.sh <user-name>  "
-    echo "                                  "
-    echo "Example:                          "
-    echo "  sudo bash setup.sh nate-wilkins "
-    exit 1
-fi
+# -[ parse arguments ]---------------------------------------- #
+# /
+while [[ $# -gt 0 ]]
+do
+  key="$1"
+  case $key in
+    -u|--user)
+      DOTFILES_USER="$2"
+      shift
+      shift
+      ;;
+    -se|--skip-encrypted)
+      SKIP_ENCRYPTED=yes
+      shift
+      ;;
+    *)
+      echo "Usage:                                                 "
+      echo "  sudo bash setup.sh -u <user-name>                    "
+      echo "                                                       "
+      echo "Options:                                               "
+      echo "  -u|--user              user to provide dotfiles for. "
+      echo "  -se|--skip-encrypted   skips encrypted doftiles.     "
+      echo "                                                       "
+      echo "Example:                                               "
+      echo "  sudo bash setup.sh -u nate-wilkins                   "
+      echo "  sudo bash setup.sh -u john-doe     --skip-encrypted  "
+      shift
+      exit 1
+      ;;
+  esac
+done
 
 
 # -[ dependencies ]------------------------------------------- #

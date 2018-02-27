@@ -70,9 +70,16 @@ fresh-options                                                  --file=~/.config/
   fresh                                      .sxhkdrc
 
 mkdir -p ~/.config/polybar
-[ -f ~/.config/polybar/config ] && rm ~/.config/polybar/config
+[ -f ~/.config/polybar/config ] && rm -f ~/.config/polybar/config
 fresh-options                                                  --file=~/.config/polybar/config
   fresh                                      .polybar
+
+if [ $SKIP_ENCRYPTED != "yes" ]; then
+  mkdir -p ~/.config/asciinema
+  [ -f ~/.config/asciinema/config ] && rm -f ~/.config/asciinema/config
+  fresh-options                                                --file=~/.config/asciinema/config
+    fresh                                    .asciinema
+fi
 
 [ -f ~/.curlrc ] && rm -f ~/.curlrc
 fresh-options                                                  --file=~/.curlrc
