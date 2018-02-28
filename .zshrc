@@ -31,12 +31,13 @@ antigen bundle command-not-found
 antigen bundle nyan
 antigen bundle emoji
 
-antigen bundle lukechilds/zsh-nvm
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle unixorn/autoupdate-antigen.zshplugin
-antigen bundle ascii-soup/zsh-url-highlighter
+antigen bundle   lukechilds/zsh-nvm
+antigen bundle    zsh-users/zsh-completions
+antigen bundle    zsh-users/zsh-history-substring-search
+antigen bundle    zsh-users/zsh-syntax-highlighting
+antigen bundle      unixorn/autoupdate-antigen.zshplugin
+antigen bundle   ascii-soup/zsh-url-highlighter
+antigen bundle      Valodim/zsh-curl-completion
 
 # - theme
 antigen theme halfo/lambda-mod-zsh-theme
