@@ -15,7 +15,7 @@ fi
 # -[ configuration ]------------------------------------------ #
 # /
 # - source directory
-$ROOT_DIR=`dirname $0`
+$ROOT_DIR=`dirname ${BASH_SOURCE[0]}`
 $ROOT_DIR=${ROOT_DIR:=.}
 
 # - base16-builder schemes
