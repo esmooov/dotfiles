@@ -15,8 +15,14 @@ fi
 # -[ configuration ]------------------------------------------ #
 # /
 # - source directory
-$ROOT_DIR=`dirname ${BASH_SOURCE[0]}`
-$ROOT_DIR=${ROOT_DIR:=.}
+#   https://stackoverflow.com/a/246128/422312
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+ROOT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # - base16-builder schemes
 #     solarized
