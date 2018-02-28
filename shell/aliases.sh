@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # - system
+alias cls="clear" # :sad:
+
 alias ls="exa --group-directories-first"
 alias l="exa --long --group-directories-first --group --git"
 alias la="exa --long --group-directories-first --all --group --git"
@@ -21,4 +23,4 @@ done
 # - git
 # `cd` to git repository root
 # Taken from: sapegin/dotfiles
-alias gr='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
+alias groot='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
