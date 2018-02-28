@@ -4,8 +4,6 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
-$ROOT_DIR=`dirname $0`
-
 # -[ root check ]--------------------------------------------- #
 # /
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
@@ -16,12 +14,15 @@ fi
 
 # -[ configuration ]------------------------------------------ #
 # /
-#
-# base16-builder schemes
-# - solarized
-# - codeschool
-# - flat
-# - darktooth
+# - source directory
+$ROOT_DIR=`dirname $0`
+$ROOT_DIR=${ROOT_DIR:=.}
+
+# - base16-builder schemes
+#     solarized
+#     codeschool
+#     flat
+#     darktooth
 DOTFILES_SCHEME=harmonic
 DOTFILES_THEME=dark
 
@@ -77,6 +78,17 @@ if [ -z $DOTFILES_USER ]; then
     echo "  sudo bash install.sh --user <user>"
     exit 2
 fi
+
+echo "                                          "
+echo "< starting install >                      "
+echo "                                          "
+echo "[vars]                                    "
+echo "dirname=$ROOT_DIR                         "
+echo "--user=$DOTFILES_USER                     "
+echo "--skip-encrypted=$DOTFILES_SKIP_ENCRYPTED "
+echo "--scheme=$DOTFILES_SCHEME                 "
+echo "--theme=$DOTFILES_THEME                   "
+echo "                                          "
 
 # -[ dependencies ]------------------------------------------- #
 # /
