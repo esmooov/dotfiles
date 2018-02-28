@@ -4,7 +4,7 @@
 
 > Dotfiles for my development environment. Managed with [fresh]!
 
-## Installation
+## Usage
 
 ```
 git clone https://github.com/nate-wilkins/.dotfiles ~/.dotfiles
