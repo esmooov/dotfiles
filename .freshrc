@@ -49,6 +49,7 @@ fresh-options                                                  --bin
   fresh        sapegin/dotfiles          bin/semver            # manipulate semver strings.
   fresh        sapegin/dotfiles          bin/git-github        # synchronize current repository with github.
   fresh           voku/dotfiles          bin/matrix.sh         # prints a matrix-ish display.
+  fresh   nate-wilkins/gh-backup             gh-backup.sh      # simple bash script to backup a GitHub user's repo.
 
   # local
   fresh                                  bin/trim.sh           # trim leading and trailing whitespace.
