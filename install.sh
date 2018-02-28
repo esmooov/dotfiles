@@ -4,13 +4,15 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
+
 # -[ root check ]--------------------------------------------- #
 # /
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Unable to proceed. Script must be run as root."
-    echo "  sudo bash setup.sh"
+    echo "  sudo bash install.sh"
     exit -2
 fi
+
 
 # -[ configuration ]------------------------------------------ #
 # /
@@ -33,6 +35,7 @@ DOTFILES_SCHEME=harmonic
 DOTFILES_THEME=dark
 
 DOTFILES_SKIP_ENCRYPTED=no
+
 
 # -[ parse arguments ]---------------------------------------- #
 # /
