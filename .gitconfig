@@ -1,17 +1,29 @@
 [core]
-    autocrlf = false
+	autocrlf = false
+
+	# Taken from janmoesen/tilde
+	# Enable parallel I/O for operations like "git diff".
+	# See http://stackoverflow.com/q/18257622/276478
+	preloadindex = true
+
+	# Taken from janmoesen/tilde
+	# Use 12 characters for the abbreviated commit hash. I can currently make
+	# do with 10, but this should provide a certain level of safety for the
+	# near-ish future. See the interesting and well-researched article at
+	# http://blog.cuviper.com/2013/11/10/how-short-can-git-abbreviate/
+	abbrev = 12
 
 [user]
-    name = nate-wilkins
-    email = nate-wilkins@code-null.com
+	name = nate-wilkins
+	email = nate-wilkins@code-null.com
 
 [diff]
 
 [color]
-    ui = auto
+	ui = auto
 
 [color "diff"]
-commit = yellow reverse
+	commit = yellow reverse
 
 [alias]
 	s = status -s
@@ -34,34 +46,34 @@ commit = yellow reverse
   untracked = ls-files --others --exclude-standard
 
 [github]
-    user = nate-wilkins
+	user = nate-wilkins
 
 [push]
-    # only push current branch
-    default = upstream
+	# only push current branch
+	default = upstream
 
 [merge]
-    log = true
-    conflictstyle = diff3
-    tool = vimdiff
+	log = true
+	conflictstyle = diff3
+	tool = vimdiff
 
 [rebase]
-    autosquash = true
-    autostash = true
+	autosquash = true
+	autostash = true
 
 [branch "master"]
 	mergeoptions = --ff-only
 
 [tag]
-    sort = version:refname
+	sort = version:refname
 
 [gitflow "branch"]
-    master = master
-    develop = develop
+	master = master
+	develop = develop
 
 [gitflow "prefix"]
-    feature = feature/
-    release = release/
-    hotfix = hotfix/
-    support = support/
-    versiontag =
+	feature = feature/
+	release = release/
+	hotfix = hotfix/
+	support = support/
+	versiontag =
