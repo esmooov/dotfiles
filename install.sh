@@ -39,6 +39,7 @@ DOTFILES_SKIP_ENCRYPTED=no
 
 # -[ parse arguments ]---------------------------------------- #
 # /
+if    [[ $# -eq 0 ]]; then set -- "--help"; fi
 while [[ $# -gt 0 ]]
 do
   key="$1"

@@ -31,8 +31,10 @@
 	mff = merge --ff-only
   cs = commit --squash
   cf = commit --fixup
-  amend = commit --amend
-  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	amend = commit --amend
+	lgo= log --graph --oneline
+	lgs= log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''  %C(green)%G?%C(reset) %C(dim white)%an <%ae> %C(reset)%n  %C(green)%GS%C(reset)%n  %C(white)%s%C(reset)' --all
+  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''  %C(green)%G?%C(reset) %C(dim white)%an <%ae> %C(reset)%n  %C(white)%s%C(reset)' --all
   aa = add .
   fa = fetch --all
   dh1 = diff HEAD~1
@@ -47,6 +49,9 @@
 
 [github]
 	user = nate-wilkins
+
+[commit]
+	gpgsign = true
 
 [push]
 	# only push current branch
