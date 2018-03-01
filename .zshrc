@@ -84,6 +84,15 @@ conf() {
     esac
 }
 
+# - proj functions
+compdef _proj proj
+_proj() {
+    _arguments "1: :($( ls -d */ | cut -f1 -d'/' | sed -z 's/\n/ /g' ))"
+}
+proj() {
+    echo $1
+}
+
 # \
 # -[ other ]-------------------------------------------------- #
 
