@@ -64,12 +64,6 @@ emulate sh -c "`cat ~/.fresh/build/shell.sh | tail -n +2`"
 # - vte (termite)
 source /etc/profile.d/vte-*.sh
 
-# - ssh
-eval $(keychain --eval github-god_rsa)
-
-# - gpg
-gpg-agent --daemon &> /dev/null
-
 # - dotfile functions
 compdef \
     '_arguments "1: :(zsh sxhkd fresh bspwm curl editor gem git polybar spacemacs)"' \
@@ -89,5 +83,16 @@ conf() {
         *)         $EDITOR ~/.dotfiles;;
     esac
 }
+
 # \
 # -[ other ]-------------------------------------------------- #
+
+# -[ security ]----------------------------------------------- #
+# /
+# - ssh
+eval $(keychain --eval github-god_rsa)
+
+# - gpg
+gpg-agent --daemon &> /dev/null
+# \
+# -[ security ]-------------------------------------------------- #
