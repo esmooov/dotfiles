@@ -16,6 +16,7 @@
 [user]
 	name = nate-wilkins
 	email = nate-wilkins@code-null.com
+	signingkey = AAA34B2FC4B660C6
 
 [diff]
 
