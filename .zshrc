@@ -85,12 +85,9 @@ conf() {
 }
 
 # - proj functions
-compdef _proj proj
-_proj() {
-    _arguments "1: :($( ls -d */ | cut -f1 -d'/' | sed -z 's/\n/ /g' ))"
-}
 proj() {
-    echo $1
+    # TODO: more... - need to learn how to ls -d */ for zsh autocompletion.
+    cd ~/projects
 }
 
 # \
