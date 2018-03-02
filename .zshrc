@@ -59,6 +59,8 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # -[ other ]-------------------------------------------------- #
 # /
 # - fresh
+_FRESH_BIN_PATH=$HOME/.fresh/build/bin
+export PATH="$_FRESH_BIN_PATH:$PATH"
 emulate sh -c "`cat ~/.fresh/build/shell.sh | tail -n +2`"
 
 # - vte (termite)
