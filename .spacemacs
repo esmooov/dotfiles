@@ -218,6 +218,9 @@ you should place your code here."
    deft-directory "~/Dropbox/Notes"
    deft-extensions '("md", "txt"))
 
+  (custom-set-variables
+   '(markdown-command "/usr/bin/pandoc"))
+
   (spacemacs/toggle-fill-column-indicator-on)
 
   ;; monitor the system clipboard and add any changes to the kill ring.
