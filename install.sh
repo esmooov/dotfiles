@@ -23,38 +23,41 @@ ROOT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 if    [[ $# -eq 0 ]]; then set -- "--help"; fi
 while [[ $# -gt 0 ]]
 do
-  key="$1"
-  case $key in
-    -se|--skip-encrypted)
-      DOTFILES_SKIP_ENCRYPTED=yes
-      shift
-      ;;
-    -s|--scheme)
-      DOTFILES_SCHEME="$2"
-      shift
-      shift
-      ;;
-    -t|--theme)
-      DOTFILES_THEME="$2"
-      shift
-      shift
-      ;;
-    *)
-      echo "Usage:                                                         "
-      echo "  sudo bash install.sh                                         "
-      echo "                                                               "
-      echo "Options:                                                       "
-      echo "  -s | --scheme              specify a different color scheme. "
-      echo "  -t | --theme  (dark|light) specify a different color theme.  "
-      echo "  -se| --skip-encrypted      skips encrypted doftiles.         "
-      echo "                                                               "
-      echo "Example:                                                       "
-      echo "  sudo bash install.sh                                         "
-      echo "  sudo bash install.sh --skip-encrypted                        "
-      shift
-      exit 1
-      ;;
-  esac
+    key="$1"
+    case $key in
+        start)
+            shift
+            ;;
+        -se|--skip-encrypted)
+            DOTFILES_SKIP_ENCRYPTED=yes
+            shift
+            ;;
+        -s|--scheme)
+            DOTFILES_SCHEME="$2"
+            shift
+            shift
+            ;;
+        -t|--theme)
+            DOTFILES_THEME="$2"
+            shift
+            shift
+            ;;
+        *)
+            echo "Usage:                                                         "
+            echo "  sudo bash install.sh start                                   "
+            echo "                                                               "
+            echo "Options:                                                       "
+            echo "  -s | --scheme              specify a different color scheme. "
+            echo "  -t | --theme  (dark|light) specify a different color theme.  "
+            echo "  -se| --skip-encrypted      skips encrypted doftiles.         "
+            echo "                                                               "
+            echo "Example:                                                       "
+            echo "  sudo bash install.sh start                                   "
+            echo "  sudo bash install.sh start --skip-encrypted                  "
+            shift
+            exit 1
+            ;;
+    esac
 done
 
 # root check?
