@@ -8,6 +8,10 @@ alias l="exa --long --group-directories-first --group --git"
 alias la="exa --long --group-directories-first --all --group --git"
 alias tree="exa -T"
 
+alias c="xclip"
+alias v="xclip -o"
+alias cb="xclip -selection clipboard"
+
 # - gpg
 alias gpgls="gpg --list-secret-keys --keyid-format LONG"
 
