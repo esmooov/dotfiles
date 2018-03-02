@@ -9,15 +9,15 @@
 ```
 git clone https://github.com/nate-wilkins/.dotfiles ~/.dotfiles
 chmod +x ~/.dotfiles/install.sh
-sudo bash ~/.dotfiles/install.sh --user nate-wilkins
+sudo bash ~/.dotfiles/install.sh
 ```
 
-## *Note*
+## *Notes*
 
 These scripts assume you are `nate-wilkins`.
+It is highly recommended you clone this repository or call yourself `nate-wilkins`.
 
-It is highly recommended you clone this repository if you're using it with [EvE.Ubuntu]
-if not it's okay to replace `nate-wilkins` with `<your-ubuntu-user>` (which assumes is your github username.)
+These scripts also assume a GitHub repository and a GitHub username that matches your `$USER`.
 
 These scripts also contain encrypted files that won't be relevant.
 To bypass these use `install.sh --skip-encrypted`.

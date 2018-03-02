@@ -5,15 +5,6 @@
 # \-------------------------/ #
 
 
-# -[ root check ]--------------------------------------------- #
-# /
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "Unable to proceed. Script must be run as root."
-    echo "  sudo bash install.sh"
-    exit -2
-fi
-
-
 # -[ configuration ]------------------------------------------ #
 # /
 # - source directory
@@ -26,16 +17,6 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 ROOT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-# - base16-builder schemes
-#     solarized
-#     codeschool
-#     flat
-#     darktooth
-DOTFILES_SCHEME=harmonic
-DOTFILES_THEME=dark
-
-DOTFILES_SKIP_ENCRYPTED=no
-
 
 # -[ parse arguments ]---------------------------------------- #
 # /
@@ -44,11 +25,6 @@ while [[ $# -gt 0 ]]
 do
   key="$1"
   case $key in
-    -u|--user)
-      DOTFILES_USER="$2"
-      shift
-      shift
-      ;;
     -se|--skip-encrypted)
       DOTFILES_SKIP_ENCRYPTED=yes
       shift
@@ -65,39 +41,46 @@ do
       ;;
     *)
       echo "Usage:                                                         "
-      echo "  sudo bash install.sh -u <user-name>                          "
+      echo "  sudo bash install.sh                                         "
       echo "                                                               "
       echo "Options:                                                       "
-      echo "  -u | --user                user to provide dotfiles for.     "
       echo "  -s | --scheme              specify a different color scheme. "
       echo "  -t | --theme  (dark|light) specify a different color theme.  "
       echo "  -se| --skip-encrypted      skips encrypted doftiles.         "
       echo "                                                               "
       echo "Example:                                                       "
-      echo "  sudo bash install.sh -u nate-wilkins                         "
-      echo "  sudo bash install.sh -u john-doe     --skip-encrypted        "
+      echo "  sudo bash install.sh                                         "
+      echo "  sudo bash install.sh --skip-encrypted                        "
       shift
       exit 1
       ;;
   esac
 done
 
-# passed in user?
-if [ -z $DOTFILES_USER ]; then
-    echo "Unable to proceed. Script must be given a '--user'"
-    echo "  sudo bash install.sh --user <user>"
-    exit 2
+# root check?
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Unable to proceed. Script must be run as root."
+    echo "  sudo bash install.sh"
+    exit -2
 fi
+
+# - base16-builder schemes
+#     solarized
+#     codeschool
+#     flat
+#     darktooth
+DOTFILES_SCHEME=${DOTFILES_SCHEME:=harmonic}
+DOTFILES_THEME=${DOTFILES_THEME:=dark}
+DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED:=no}
 
 echo "                                          "
 echo "< starting install >                      "
 echo "                                          "
 echo "[vars]                                    "
 echo "dirname=$ROOT_DIR                         "
-echo "--user=$DOTFILES_USER                     "
-echo "--skip-encrypted=$DOTFILES_SKIP_ENCRYPTED "
 echo "--scheme=$DOTFILES_SCHEME                 "
 echo "--theme=$DOTFILES_THEME                   "
+echo "--skip-encrypted=$DOTFILES_SKIP_ENCRYPTED "
 echo "                                          "
 
 # -[ dependencies ]------------------------------------------- #
@@ -105,8 +88,8 @@ echo "                                          "
 # - nodejs
 if hash npm 2>/dev/null; then
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-    chmod +x /home/$DOTFILES_USER/.nvm/nvm.sh
-    . /home/$DOTFILES_USER/.nvm/nvm.sh
+    chmod +x ~/.nvm/nvm.sh
+    . ~/.nvm/nvm.sh
     nvm install node
 fi
 
@@ -144,21 +127,21 @@ base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.th
 
 # -[ fresh ]-------------------------------------------------- #
 # /
-[ -d /home/$DOTFILES_USER/.fresh ]   && rm -rf /home/$DOTFILES_USER/.fresh
-[ -f /home/$DOTFILES_USER/.freshrc ] && rm -f  /home/$DOTFILES_USER/.freshrc
+[ -d ~/.fresh ]   && rm -rf ~/.fresh
+[ -f ~/.freshrc ] && rm -f  ~/.freshrc
 # cleanup fresh symlinks.
-find /home/$DOTFILES_USER/ -lname /home/$DOTFILES_USER/.fresh/* -delete
+find ~/ -lname ~/.fresh/* -delete
 
 # make freshrc available for fresh.
-cp $ROOT_DIR/.freshrc /home/$DOTFILES_USER/.freshrc
+cp $ROOT_DIR/.freshrc ~/.freshrc
 
 # write variables for fresh.
-[ -f /home/$DOTFILES_USER/.freshvars ] && rm -f /home/$DOTFILES_USER/.freshvars
-echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > /home/$DOTFILES_USER/.freshvars
-chmod +x /home/$DOTFILES_USER/.freshvars
+[ -f ~/.freshvars ] && rm -f ~/.freshvars
+echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > ~/.freshvars
+chmod +x ~/.freshvars
 
-  FRESH_LOCAL_SOURCE=$DOTFILES_USER/dotfiles
-  runuser -l $DOTFILES_USER -c 'source <(curl -sL https://get.freshshell.com)'
+  FRESH_LOCAL_SOURCE=$USER/dotfiles
+  runuser -l $USER -c 'source <(curl -sL https://get.freshshell.com)'
 
 # sourced in .zshrc
-chmod +x /home/$DOTFILES_USER/.fresh/build/shell.sh
+chmod +x ~/.fresh/build/shell.sh
