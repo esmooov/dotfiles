@@ -4,12 +4,13 @@
 
 > Dotfiles for my development environment. Managed with [fresh]!
 
+
 ## Usage
 
 ```
 git clone https://github.com/nate-wilkins/.dotfiles ~/.dotfiles
 chmod +x ~/.dotfiles/install.sh
-sudo bash ~/.dotfiles/install.sh
+sudo bash ~/.dotfiles/install.sh start
 ```
 
 ## *Notes*
@@ -17,7 +18,7 @@ sudo bash ~/.dotfiles/install.sh
 These scripts assume you are `nate-wilkins`.
 It is highly recommended you clone this repository or call yourself `nate-wilkins`.
 
-These scripts also assume a GitHub repository and a GitHub username that matches your `$USER`.
+These scripts also assume a GitHub repository and a GitHub username that matches your `$(logname)`.
 
 These scripts also contain encrypted files that won't be relevant.
 To bypass these use `install.sh --skip-encrypted`.

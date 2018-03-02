@@ -72,6 +72,7 @@ fi
 #     codeschool
 #     flat
 #     darktooth
+DOTFILES_USER=$(logname)
 DOTFILES_SCHEME=${DOTFILES_SCHEME:=harmonic}
 DOTFILES_THEME=${DOTFILES_THEME:=dark}
 DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED:=no}
@@ -80,6 +81,7 @@ echo "                                          "
 echo "< starting install >                      "
 echo "                                          "
 echo "[vars]                                    "
+echo "user=$DOTFILES_USER                       "
 echo "dirname=$ROOT_DIR                         "
 echo "--scheme=$DOTFILES_SCHEME                 "
 echo "--theme=$DOTFILES_THEME                   "
@@ -102,7 +104,7 @@ npm install --global base16-builder
 # -[ theme ]-------------------------------------------------- #
 # /
 [ -d $ROOT_DIR/.theme/ ] && rm -rf $ROOT_DIR/.theme/
-mkdir -p $ROOT_DIR/.theme/
+runuser -l $DOTFILES_USER -c "mkdir -p $ROOT_DIR/.theme/"
 
 # - spacemacs
 # TODO: should output to ROOT_DIR and freshen with freshrc.
@@ -110,20 +112,20 @@ mkdir -p $ROOT_DIR/.theme/
 mkdir -p ~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme
 SPACEMACS_THEME=~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
 [ -f $SPACEMACS_THEME ] && rm -f $SPACEMACS_THEME
-base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME
+runuser -l $DOTFILES_USER -c "base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
 
 # - bspwm
 [ -f $ROOT_DIR/.theme/bspwm.color.sh ] && rm -f $ROOT_DIR/.theme/bspwm.color.sh
-base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh
+runuser -l $DOTFILES_USER -c "base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
 
 # - dmenu
 [ -f $ROOT_DIR/.theme/dmenu.color-shell.sh ] && rm -f $ROOT_DIR/.theme/dmenu.color-shell.sh
 DMENU_COLOR=$(base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
-echo alias dmenu="$DMENU_COLOR" >                                  $ROOT_DIR/.theme/dmenu.color-shell.sh
+runuser -l $DOTFILES_USER -c "echo alias dmenu=$DMENU_COLOR > $ROOT_DIR/.theme/dmenu.color-shell.sh"
 
 # - termite
 [ -f $ROOT_DIR/.theme/termite.color ] && rm -f $ROOT_DIR/.theme/termite.color
-base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color
+runuser -l $DOTFILES_USER -c "base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
@@ -137,14 +139,15 @@ find ~/ -lname ~/.fresh/* -delete
 
 # make freshrc available for fresh.
 cp $ROOT_DIR/.freshrc ~/.freshrc
+chown $DOTFILES_USER:$DOTFILES_USER ~/.freshrc
 
 # write variables for fresh.
 [ -f ~/.freshvars ] && rm -f ~/.freshvars
 echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > ~/.freshvars
-chmod +x ~/.freshvars
+chmod u+x ~/.freshvars
 
-  FRESH_LOCAL_SOURCE=$USER/dotfiles
-  runuser -l $USER -c 'source <(curl -sL https://get.freshshell.com)'
+  FRESH_LOCAL_SOURCE=$DOTFILES_USER/dotfiles
+  runuser -l $DOTFILES_USER -c 'source <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)'
 
 # sourced in .zshrc
 chmod +x ~/.fresh/build/shell.sh
