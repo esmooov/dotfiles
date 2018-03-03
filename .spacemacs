@@ -231,6 +231,7 @@ you should place your code here."
 
   ;; - keybindings -
   (spacemacs/set-leader-keys "C-;" 'avy-goto-char-timer)
+  (spacemacs/set-leader-keys "=" 'vc-resolve-conflicts)
 
   ;; - display sysinfo in minibuffer -
   (symon-mode))
