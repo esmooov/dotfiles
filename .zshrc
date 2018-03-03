@@ -59,7 +59,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 
 #-[ completions ]--------------------------------------------- #
 # /
-fpath=(/usr/share/zsh/site_functions)
+
 # \
 # ------------------------------------------------------------ #
 
