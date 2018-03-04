@@ -67,7 +67,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # -[ other ]-------------------------------------------------- #
 # /
 # - PATH
-export PATH="~/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # - fresh
 emulate sh -c "`cat ~/.fresh/build/shell.sh | tail -n +2`"
