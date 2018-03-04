@@ -99,7 +99,7 @@ if hash npm 2>/dev/null; then
 fi
 
 # - base16-builder
-npm install --global base16-builder
+runuser -l $DOTFILES_USER -c "npm install --global base16-builder"
 
 # -[ theme ]-------------------------------------------------- #
 # /
