@@ -4,10 +4,10 @@ PROGRAM="$(basename "$0")"
 
 case $1 in
     --enable)
-        TOUCHPAD_EVENT='enable'
+        TOUCHPAD_EVENT='enabled'
         ;;
     --disable)
-        TOUCHPAD_EVENT='disable'
+        TOUCHPAD_EVENT='disabled'
         ;;
 
     *)
