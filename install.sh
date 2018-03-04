@@ -90,16 +90,8 @@ echo "                                          "
 
 # -[ dependencies ]------------------------------------------- #
 # /
-# - nodejs
-if hash npm 2>/dev/null; then
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-    chmod +x ~/.nvm/nvm.sh
-    . ~/.nvm/nvm.sh
-    nvm install node
-fi
-
 # - base16-builder
-runuser -l $DOTFILES_USER -c "npm install --global base16-builder"
+runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh && npm install --global base16-builder"
 
 # -[ theme ]-------------------------------------------------- #
 # /
@@ -112,20 +104,20 @@ runuser -l $DOTFILES_USER -c "mkdir -p $ROOT_DIR/.theme/"
 mkdir -p ~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme
 SPACEMACS_THEME=~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
 [ -f $SPACEMACS_THEME ] && rm -f $SPACEMACS_THEME
-runuser -l $DOTFILES_USER -c "base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
+runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
 
 # - bspwm
 [ -f $ROOT_DIR/.theme/bspwm.color.sh ] && rm -f $ROOT_DIR/.theme/bspwm.color.sh
-runuser -l $DOTFILES_USER -c "base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
+runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
 
 # - dmenu
 [ -f $ROOT_DIR/.theme/dmenu.color-shell.sh ] && rm -f $ROOT_DIR/.theme/dmenu.color-shell.sh
-DMENU_COLOR=$(base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$')
+DMENU_COLOR=$(runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh && base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$'")
 runuser -l $DOTFILES_USER -c "echo alias dmenu=$DMENU_COLOR > $ROOT_DIR/.theme/dmenu.color-shell.sh"
 
 # - termite
 [ -f $ROOT_DIR/.theme/termite.color ] && rm -f $ROOT_DIR/.theme/termite.color
-runuser -l $DOTFILES_USER -c "base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
+runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
