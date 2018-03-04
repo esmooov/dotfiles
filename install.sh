@@ -143,3 +143,4 @@ chmod u+x ~/.freshvars
 
 # sourced in .zshrc
 chmod +x ~/.fresh/build/shell.sh
+chmod +x ~/.fresh/build/config-bspwm-bspwmrc
