@@ -100,6 +100,10 @@ if [ "$DOTFILES_SKIP_ENCRYPTED" != "yes" ]; then
     fresh                                    .asciinema
 fi
 
+[ -f ~/.eslintrc ] && rm -f ~/.eslintrc
+fresh-options                                                  --file=~/.eslintrc
+  fresh                                      .eslintrc         # [eslint](https://eslint.org/)
+
 [ -f ~/.curlrc ] && rm -f ~/.curlrc
 fresh-options                                                  --file=~/.curlrc
   fresh                                      .curlrc           # [curl](https://github.com/curl/curl)
