@@ -32,7 +32,7 @@ docker build --build-arg user=nate-wilkins -t nate-wilkins/dotfiles .
 These scripts assume you are `nate-wilkins`.
 It is highly recommended you clone this repository or call yourself `nate-wilkins`.
 
-These scripts also assume a GitHub repository and a GitHub username that matches your `$(logname)`.
+These scripts also assume a GitHub repository and a GitHub username that matches your `$(logname)` or the supplied `--user`.
 
 These scripts also contain encrypted files that won't be relevant.
 To bypass these use `install.sh --skip-encrypted`.
