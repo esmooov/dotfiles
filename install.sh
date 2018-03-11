@@ -4,6 +4,7 @@
 #<-[ nate-wilkins/dotfiles ]->#
 # \-------------------------/ #
 
+set -e
 
 # -[ configuration ]------------------------------------------ #
 # /
@@ -28,6 +29,11 @@ do
         start)
             shift
             ;;
+        -u | --user)
+            DOTFILES_USER="$2"
+            shift
+            shift
+            ;;
         -se|--skip-encrypted)
             DOTFILES_SKIP_ENCRYPTED=yes
             shift
@@ -43,17 +49,18 @@ do
             shift
             ;;
         *)
-            echo "Usage:                                                         "
-            echo "  sudo bash install.sh start                                   "
-            echo "                                                               "
-            echo "Options:                                                       "
-            echo "  -s | --scheme              specify a different color scheme. "
-            echo "  -t | --theme  (dark|light) specify a different color theme.  "
-            echo "  -se| --skip-encrypted      skips encrypted doftiles.         "
-            echo "                                                               "
-            echo "Example:                                                       "
-            echo "  sudo bash install.sh start                                   "
-            echo "  sudo bash install.sh start --skip-encrypted                  "
+            echo "Usage:                                                            "
+            echo "  sudo bash install.sh start                                      "
+            echo "                                                                  "
+            echo "Options:                                                          "
+            echo "  -u | --user                user in which you're installing for. "
+            echo "  -s | --scheme              specify a different color scheme.    "
+            echo "  -t | --theme  (dark|light) specify a different color theme.     "
+            echo "  -se| --skip-encrypted      skips encrypted doftiles.            "
+            echo "                                                                  "
+            echo "Example:                                                          "
+            echo "  sudo bash install.sh start                                      "
+            echo "  sudo bash install.sh start --skip-encrypted                     "
             shift
             exit 1
             ;;
@@ -67,12 +74,13 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit -2
 fi
 
+# Use logname as default - eh not great but...
+DOTFILES_USER=${DOTFILES_USER:=$(logname)}
 # - base16-builder schemes
 #     solarized
 #     codeschool
 #     flat
 #     darktooth
-DOTFILES_USER=$(logname)
 DOTFILES_SCHEME=${DOTFILES_SCHEME:=harmonic}
 DOTFILES_THEME=${DOTFILES_THEME:=dark}
 DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED:=no}
@@ -91,7 +99,7 @@ echo "                                          "
 # -[ dependencies ]------------------------------------------- #
 # /
 # - base16-builder
-runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh && npm install --global base16-builder"
+runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && npm install --global base16-builder"
 
 # -[ theme ]-------------------------------------------------- #
 # /
@@ -101,46 +109,47 @@ runuser -l $DOTFILES_USER -c "mkdir -p $ROOT_DIR/.theme/"
 # - spacemacs
 # TODO: should output to ROOT_DIR and freshen with freshrc.
 #       also need ability for spacemacs to support custom.
-mkdir -p ~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme
-SPACEMACS_THEME=~/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
+runuser -l $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme"
+SPACEMACS_THEME=/home/$DOTFILES_USER/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
 [ -f $SPACEMACS_THEME ] && rm -f $SPACEMACS_THEME
-runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
+runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
 
 # - bspwm
 [ -f $ROOT_DIR/.theme/bspwm.color.sh ] && rm -f $ROOT_DIR/.theme/bspwm.color.sh
-runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
+runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
 
 # - dmenu
 [ -f $ROOT_DIR/.theme/dmenu.color-shell.sh ] && rm -f $ROOT_DIR/.theme/dmenu.color-shell.sh
-DMENU_COLOR=$(runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh && base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$'")
+DMENU_COLOR=$(runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$'")
 runuser -l $DOTFILES_USER -c "echo alias dmenu=$DMENU_COLOR > $ROOT_DIR/.theme/dmenu.color-shell.sh"
 
 # - termite
 [ -f $ROOT_DIR/.theme/termite.color ] && rm -f $ROOT_DIR/.theme/termite.color
-runuser -l $DOTFILES_USER -c ". $HOME/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
+runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
 
 # -[ fresh ]-------------------------------------------------- #
 # /
-[ -d ~/.fresh ]   && rm -rf ~/.fresh
-[ -f ~/.freshrc ] && rm -f  ~/.freshrc
+runuser -l $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/bin"
+[ -d /home/$DOTFILES_USER/.fresh ]   && rm -rf /home/$DOTFILES_USER/.fresh
+[ -f /home/$DOTFILES_USER/.freshrc ] && rm -f  /home/$DOTFILES_USER/.freshrc
 # cleanup fresh symlinks.
-find ~/ -lname ~/.fresh/* -delete
+find /home/$DOTFILES_USER/ -lname /home/$DOTFILES_USER/.fresh/* -delete
 
 # make freshrc available for fresh.
-cp $ROOT_DIR/.freshrc ~/.freshrc
-chown $DOTFILES_USER:$DOTFILES_USER ~/.freshrc
+cp $ROOT_DIR/.freshrc /home/$DOTFILES_USER/.freshrc
+chown $DOTFILES_USER:$DOTFILES_USER /home/$DOTFILES_USER/.freshrc
 
 # write variables for fresh.
-[ -f ~/.freshvars ] && rm -f ~/.freshvars
-echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > ~/.freshvars
-chmod u+x ~/.freshvars
+[ -f /home/$DOTFILES_USER/.freshvars ] && rm -f /home/$DOTFILES_USER/.freshvars
+echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > /home/$DOTFILES_USER/.freshvars
+chmod u+x /home/$DOTFILES_USER/.freshvars
 
   FRESH_LOCAL_SOURCE=$DOTFILES_USER/dotfiles
   runuser -l $DOTFILES_USER -c 'source <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)'
 
 # sourced in .zshrc
-chmod +x ~/.fresh/build/shell.sh
-chmod +x ~/.fresh/build/config-bspwm-bspwmrc
+chmod +x /home/$DOTFILES_USER/.fresh/build/shell.sh
+chmod +x /home/$DOTFILES_USER/.fresh/build/config-bspwm-bspwmrc
