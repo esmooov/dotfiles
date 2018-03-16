@@ -1,4 +1,5 @@
 [options]
+font = Hack
 font = Monospace 9
 font = DejaVu Sans Mono 9
 mouse_autohide = true
