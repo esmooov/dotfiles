@@ -102,13 +102,6 @@ zstyle ':completion:*' insert-tab false
 #  .kerl/scripts       -> erlang version manager
 #  .kiex/scripts       -> elixir version manager
 #  .kiex/elixirs/*.env -> elixir
-PATH="$HOEM/bin:$PATH"
-PATH="$HOME/.cargo/bin:$PATH"
-PATH="$HOME/.kerl/scripts:$PATH"
-
-ERL_VERSION="$(basename $(find $HOME/.kerl/builds/* -type d | sort | head -n 1))"
-PATH="$HOME/.kerl/builds/$ERL_VERSION/release_$ERL_VERSION/bin:$PATH"
-
 source "$HOME/.kiex/scripts/kiex"
 source "$(find $HOME/.kiex/elixirs/*.env -type f | sort | head -n 1)"
 
