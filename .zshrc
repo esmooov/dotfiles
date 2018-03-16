@@ -38,8 +38,11 @@ antigen bundle    zsh-users/zsh-syntax-highlighting
 antigen bundle      unixorn/autoupdate-antigen.zshplugin
 antigen bundle   ascii-soup/zsh-url-highlighter
 antigen bundle      Valodim/zsh-curl-completion
+antigen bundle      desyncr/auto-ls
+antigen bundle     mafredri/zsh-async
 
 # - theme
+#antigen bundle sindresorhus/pure
 antigen theme halfo/lambda-mod-zsh-theme
 
 # - apply
@@ -53,6 +56,15 @@ antigen apply
 # <Shift+Tab> :: reverse menu select.
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 
+# \
+# ------------------------------------------------------------ #
+
+#-[ configurations ]------------------------------------------ #
+# /
+# - desyncr/auto-ls
+AUTO_LS_PATH=true
+# NOTE: Pulled from aliases.
+AUTO_LS_COMMANDS=("/usr/local/bin/exa --long --group-directories-first --all --group --git" git-status)
 # \
 # ------------------------------------------------------------ #
 
