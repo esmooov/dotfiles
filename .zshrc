@@ -67,7 +67,22 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # -[ other ]-------------------------------------------------- #
 # /
 # - PATH
-export PATH="$HOME/bin:$HOME/.cargo/bin:$PATH"
+#  bin                 -> user bin
+#  .cargo/bin          -> rust
+#  .kerl/scripts       -> erlang version manager
+#  .kiex/scripts       -> elixir version manager
+#  .kiex/elixirs/*.env -> elixir
+PATH="$HOEM/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.kerl/scripts:$PATH"
+
+ERL_VERSION="$(find $HOME/.kerl/builds/* -type d | sort | head -n 1)"
+PATH="$HOME/.kerl/builds/$ERL_VERSION/release_$ERL_VERSION/bin:$PATH"
+
+source "$HOME/.kiex/scripts/kiex"
+source "$(find $HOME/.kiex/elixirs/*.env -type f | sort | head -n 1)"
+
+export PATH="$PATH"
 
 # - fresh
 emulate sh -c "`cat ~/.fresh/build/shell.sh | tail -n +2`"
