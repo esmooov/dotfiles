@@ -116,6 +116,10 @@ fresh-options                                                  --file=~/.editorc
 fresh-options                                                  --file=~/.gemrc
   fresh                                      .gemrc            # [ruby gem](https://rubygems.org/)
 
+[ -f ~/.kerlrc ] && rm -f ~/.kerlrc
+fresh-options                                                  --file=~/.kerlrc
+  fresh                                      .kerlrc           # [kerl](https://github.com/kerl/kerl)
+
 [ -f ~/.gitconfig ] && rm -f ~/.gitconfig
 fresh-options                                                  --file=~/.gitconfig
   fresh                                      .gitconfig        # [git (scm)](https://git-scm.com/)
