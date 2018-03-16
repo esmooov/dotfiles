@@ -102,10 +102,17 @@ zstyle ':completion:*' insert-tab false
 #  .kerl/scripts       -> erlang version manager
 #  .kiex/scripts       -> elixir version manager
 #  .kiex/elixirs/*.env -> elixir
+
 source "$HOME/.kiex/scripts/kiex"
 source "$(find $HOME/.kiex/elixirs/*.env -type f | sort | head -n 1)"
 
-export PATH="$PATH"
+ERL_VERSION="$(basename $(find $HOME/.kerl/builds/* -type d | sort | head -n 1))"
+
+export PATH=$HOME/bin\
+:$HOME/.cargo/bin\
+:$HOME/.kerl/scripts\
+:$HOME/.kerl/builds/$ERL_VERSION/release_$ERL_VERSION/bin\
+:$PATH
 
 # - fresh
 emulate sh -c "`cat ~/.fresh/build/shell.sh | tail -n +2`"
