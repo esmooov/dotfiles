@@ -23,13 +23,16 @@ antigen bundle copybuffer
 antigen bundle cp
 antigen bundle history
 antigen bundle gulp
-antigen bundle mix
+antigen bundle elixir
+antigen bundle nohup
 antigen bundle jsontools
+antigen bundle listbox
 antigen bundle heroku
 antigen bundle git-flow
 antigen bundle command-not-found
 antigen bundle nyan
-antigen bundle emoji
+antigen bundle emoji-cli
+antigen bundle hacker-quotes
 
 antigen bundle   lukechilds/zsh-nvm
 antigen bundle    zsh-users/zsh-completions
@@ -40,6 +43,8 @@ antigen bundle   ascii-soup/zsh-url-highlighter
 antigen bundle      Valodim/zsh-curl-completion
 antigen bundle      desyncr/auto-ls
 antigen bundle     mafredri/zsh-async
+antigen bundle     caarlos0/open-pr kind:path
+antigen bundle       ninrod/pass-zsh-completion
 
 # - theme
 #antigen bundle sindresorhus/pure
@@ -59,7 +64,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # \
 # ------------------------------------------------------------ #
 
-#-[ configurations ]------------------------------------------ #
+# -[ configurations ]----------------------------------------- #
 # /
 # - desyncr/auto-ls
 AUTO_LS_PATH=true
@@ -69,7 +74,16 @@ AUTO_LS_COMMANDS=("/usr/local/bin/exa --long --group-directories-first --all --g
 # ------------------------------------------------------------ #
 
 
-#-[ completions ]--------------------------------------------- #
+# -[ aliases ]------------------------------------------------ #
+# /
+gpr() {
+    git push origin HEAD && git open-pr "$@"
+}
+# \
+# ------------------------------------------------------------ #
+
+
+# -[ completions ]-------------------------------------------- #
 # /
 
 # \

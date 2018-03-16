@@ -32,7 +32,8 @@
 	mff = merge --ff-only
   cs = commit --squash
   cf = commit --fixup
-	amend = commit --amend
+	amendm = commit --amend
+	amend = commit --ammend --no-edit
 	lgo= log --graph --oneline
 	lgs= log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''  %C(green)%G?%C(reset) %C(dim white)%an <%ae> %C(reset)%n  %C(green)%GS%C(reset)%n  %C(white)%s%C(reset)' --all
   lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''  %C(green)%G?%C(reset) %C(dim white)%an <%ae> %C(reset)%n  %C(white)%s%C(reset)' --all
@@ -47,6 +48,7 @@
 	crypt = !git-crypt
   # list only untracked files
   untracked = ls-files --others --exclude-standard
+	pr = open-pr
 
 [github]
 	user = nate-wilkins
