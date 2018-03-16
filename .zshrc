@@ -9,13 +9,18 @@
 # /
 # zsh
 setopt autocd
+setopt histignoredups
+setopt menucomplete
+setopt nolistbeep
+
+# oh-my-zsh
+COMPLETION_WAITING_DOTS="true"
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # - desyncr/auto-ls
 AUTO_LS_PATH=true
 # NOTE: Pulled from aliases.
 AUTO_LS_COMMANDS=("/usr/local/bin/exa --long --group-directories-first --all --group --git" git-status)
-# - b4b4r07/emoji-cli
-EMOJI_CLI_KEYBIND=^k
 # \
 # ------------------------------------------------------------ #
 
@@ -23,11 +28,6 @@ EMOJI_CLI_KEYBIND=^k
 # -[ antigen ]------------------------------------------------ #
 # /
 source ~/antigen.zsh
-
-# - config
-# oh-my-zsh
-COMPLETION_WAITING_DOTS="true"
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # - usings
 antigen use oh-my-zsh
@@ -57,7 +57,6 @@ antigen bundle      desyncr/auto-ls
 antigen bundle     mafredri/zsh-async
 antigen bundle     caarlos0/open-pr kind:path
 antigen bundle       ninrod/pass-zsh-completion
-antigen bundle      b4b4r07/emoji-cli
 antigen bundle     micrenda/zsh-nohup
 
 # - theme
