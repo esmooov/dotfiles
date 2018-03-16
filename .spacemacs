@@ -120,7 +120,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Fonts
    ;; - Source Code Pro
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Hack"
                                :size 14
                                :weight normal
                                :width normal
