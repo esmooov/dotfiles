@@ -4,6 +4,22 @@
 #<-[    dotfiles/.zshrc    ]->#
 # \-------------------------/ #
 
+
+# -[ configurations ]----------------------------------------- #
+# /
+# zsh
+setopt autocd
+
+# - desyncr/auto-ls
+AUTO_LS_PATH=true
+# NOTE: Pulled from aliases.
+AUTO_LS_COMMANDS=("/usr/local/bin/exa --long --group-directories-first --all --group --git" git-status)
+# - b4b4r07/emoji-cli
+EMOJI_CLI_KEYBIND=^k
+# \
+# ------------------------------------------------------------ #
+
+
 # -[ antigen ]------------------------------------------------ #
 # /
 source ~/antigen.zsh
@@ -62,15 +78,6 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # \
 # ------------------------------------------------------------ #
 
-# -[ configurations ]----------------------------------------- #
-# /
-# - desyncr/auto-ls
-AUTO_LS_PATH=true
-# NOTE: Pulled from aliases.
-AUTO_LS_COMMANDS=("/usr/local/bin/exa --long --group-directories-first --all --group --git" git-status)
-# \
-# ------------------------------------------------------------ #
-
 
 # -[ aliases ]------------------------------------------------ #
 # /
@@ -83,7 +90,7 @@ gpr() {
 
 # -[ completions ]-------------------------------------------- #
 # /
-
+zstyle ':completion:*' insert-tab false
 # \
 # ------------------------------------------------------------ #
 
