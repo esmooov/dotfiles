@@ -24,15 +24,11 @@ antigen bundle cp
 antigen bundle history
 antigen bundle gulp
 antigen bundle elixir
-antigen bundle nohup
 antigen bundle jsontools
-antigen bundle listbox
 antigen bundle heroku
 antigen bundle git-flow
 antigen bundle command-not-found
 antigen bundle nyan
-antigen bundle emoji-cli
-antigen bundle hacker-quotes
 
 antigen bundle   lukechilds/zsh-nvm
 antigen bundle    zsh-users/zsh-completions
@@ -45,6 +41,8 @@ antigen bundle      desyncr/auto-ls
 antigen bundle     mafredri/zsh-async
 antigen bundle     caarlos0/open-pr kind:path
 antigen bundle       ninrod/pass-zsh-completion
+antigen bundle      b4b4r07/emoji-cli
+antigen bundle     micrenda/zsh-nohup
 
 # - theme
 #antigen bundle sindresorhus/pure
