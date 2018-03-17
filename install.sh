@@ -150,6 +150,9 @@ chmod u+x /home/$DOTFILES_USER/.freshvars
   FRESH_LOCAL_SOURCE=$DOTFILES_USER/dotfiles
   runuser -l $DOTFILES_USER -c 'source <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)'
 
+# make sure spacemacs can modify for generated lisp.
+chmod 666 /home/$DOTFILES_USER/.fresh/build/spacemacs
+
 # sourced in .zshrc
 chmod +x /home/$DOTFILES_USER/.fresh/build/shell.sh
 chmod +x /home/$DOTFILES_USER/.fresh/build/config-bspwm-bspwmrc
