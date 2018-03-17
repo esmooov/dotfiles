@@ -113,7 +113,7 @@ export PATH=$HOME/bin\
 :$HOME/.cargo/bin\
 :$HOME/.diff-so-fancy\
 :$HOME/.kerl/scripts\
-:$HOME/.kerl/installs/$ERL_VERSION/release_$ERL_VERSION/bin\
+:$HOME/.kerl/installs/$ERL_VERSION/bin\
 :$PATH
 
 # - kerl
