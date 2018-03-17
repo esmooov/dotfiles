@@ -99,6 +99,7 @@ zstyle ':completion:*' insert-tab false
 # - PATH
 #  bin                 -> user bin
 #  .cargo/bin          -> rust
+#  .diff-so-fancy      -> diff-so-fancy
 #  .kerl/scripts       -> erlang version manager
 #  .kiex/scripts       -> elixir version manager
 #  .kiex/elixirs/*.env -> elixir
@@ -110,6 +111,7 @@ ERL_VERSION="$(basename $(find $HOME/.kerl/builds/* -type d | sort | head -n 1))
 
 export PATH=$HOME/bin\
 :$HOME/.cargo/bin\
+:$HOME/.diff-so-fancy\
 :$HOME/.kerl/scripts\
 :$HOME/.kerl/installs/$ERL_VERSION/release_$ERL_VERSION/bin\
 :$PATH
