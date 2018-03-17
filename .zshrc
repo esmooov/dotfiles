@@ -111,8 +111,11 @@ ERL_VERSION="$(basename $(find $HOME/.kerl/builds/* -type d | sort | head -n 1))
 export PATH=$HOME/bin\
 :$HOME/.cargo/bin\
 :$HOME/.kerl/scripts\
-:$HOME/.kerl/builds/$ERL_VERSION/release_$ERL_VERSION/bin\
+:$HOME/.kerl/installs/$ERL_VERSION/release_$ERL_VERSION/bin\
 :$PATH
+
+# - kerl
+export KERL_DEFAULT_INSTALL_DIR=$HOME/.kerl/installs
 
 # - fresh
 emulate sh -c "`cat ~/.fresh/build/shell.sh | tail -n +2`"
