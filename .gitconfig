@@ -1,6 +1,12 @@
 [core]
 	autocrlf = false
 
+  # Taken from so-fancy/diff-so-fancy
+	# https://github.com/so-fancy/diff-so-fancy
+	# Transforms diffs so they're readable.
+  pager = "diff-so-fancy | less --tabs=2 -RFX"
+
+
 	# Taken from janmoesen/tilde
 	# Enable parallel I/O for operations like "git diff".
 	# See http://stackoverflow.com/q/18257622/276478
@@ -18,13 +24,22 @@
 	email = nate-wilkins@code-null.com
 	signingkey = AAA34B2FC4B660C6
 
-[diff]
-
 [color]
-	ui = auto
+	ui = true
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 
 [color "diff"]
-	commit = yellow reverse
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 
 [alias]
 	s = status -s
@@ -47,7 +62,8 @@
 	# provide encryption for repositories
 	crypt = !git-crypt
   # list only untracked files
-  untracked = ls-files --others --exclude-standard
+	untracked = ls-files --others --exclude-standard
+	# opens a github pr - pretty awesome.
 	pr = open-pr
 
 [github]
