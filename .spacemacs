@@ -9,7 +9,7 @@
   (setq-default
    dotspacemacs-distribution 'spacemacs
    ;; options: `all', `unused', `nil'
-   dotspacemacs-enable-lazy-installation 'all
+   dotspacemacs-enable-lazy-installation 'unused
    dotspacemacs-ask-for-lazy-installation t
    ;; dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    dotspacemacs-delete-orphan-packages t
@@ -82,9 +82,6 @@
      emojify
      google-this
 
-     ;; https://github.com/zk-phi/symon/
-     (symon :repo "https://github.com/zk-phi/symon/" :fetcher github)
-
      ;; https://github.com/melpa/melpa#recipe-format
      (speed-type :repo "hagleitn/speed-type" :fetcher github :files ("speed-type.el"))
      )
@@ -111,7 +108,7 @@ values."
    dotspacemacs-startup-lists '((projects . 7)
                                 (recents . 5))
    dotspacemacs-startup-buffer-responsive t
-   dotspacemacs-scratch-mode 'text-mode
+   dotspacemacs-scratch-mode 'markdown-mode
    ;; Press <SPC> T n to cycle to the next theme in the list.
    dotspacemacs-themes'(spacemacs-dark
                         spacemacs-light)
@@ -127,7 +124,8 @@ values."
                                :width normal
                                :powerline-scale 1.1)
    dotspacemacs-leader-key "SPC"
-   dotspacemacs-emacs-command-key "SPC"
+   ;; SPC-: -> can be used instead of: M-x
+   dotspacemacs-emacs-command-key ":"
    dotspacemacs-ex-command-key ":"
    dotspacemacs-emacs-leader-key "M-m"
    dotspacemacs-major-mode-leader-key ","
@@ -216,23 +214,52 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq-default
+   ;; deft.
    deft-directory "~/Dropbox/Notes"
-   deft-extensions '("md", "txt"))
+   deft-extensions '("md", "txt")
+   ;; no acceleration on mouse wheel.
+   mouse-wheel-progressive-speed nil
+   ;; min number of lines to keep below/above the cursor in view.
+   scroll-margin 5
+   ;; open urls -> google-chrome
+   browse-url-browser-function 'browse-url-generic
+   browse-url-generic-program "google-chrome")
+
+  ;; no double spacing sentences.
+  (setq sentence-end-double-space nil)
+  ;; follow symlinks when editing.
+  (setq vc-follow-symlinks t)
 
   (custom-set-variables
    '(markdown-command "/usr/bin/pandoc"))
 
-  (spacemacs/toggle-fill-column-indicator-on)
+  ;; [hooks]
+  ;; prog.
+  (defun custom-prog-hook ()
+    (spacemacs/toggle-fill-column-indicator-on))
 
-  ;; monitor the system clipboard and add any changes to the kill ring.
+  (add-hook 'prog-mode-hook 'custom-prog-hook)
+
+  ;; erlang.
+  (defun custom-erlang-mode-hook ()
+    (spacemacs/set-leader-keys-for-major-mode 'erlang-mode "." 'alchemist-goto-definition-at-point)
+    (spacemacs/set-leader-keys-for-major-mode 'erlang-mode "," 'alchemist-goto-jump-back))
+
+  (add-hook 'erlang-mode-hook 'custom-erlang-mode-hook)
+
+  ;; elixir.
+  (defun custom-elixir-mode-hook ()
+    (spacemacs/set-leader-keys-for-major-mode 'elixir-mode "." 'alchemist-goto-definition-at-point)
+    (spacemacs/set-leader-keys-for-major-mode 'elixir-mode "," 'alchemist-goto-jump-back))
+
+  (add-hook 'elixir-mode-hook 'custom-elixir-mode-hook)
+
+  ;; # enable emojis everywhere.
+  (add-hook 'after-init-hook #'global-emojify-mode)
+  ;; # monitor the system clipboard and add any changes to the kill ring.
   (add-to-list 'after-init-hook 'clipmon-mode-start)
 
-  ;; enable emojis everywhere.
-  (add-hook 'after-init-hook #'global-emojify-mode)
-
-  ;; - keybindings -
-  (spacemacs/set-leader-keys "C-;" 'avy-goto-char-timer)
+  ;; [keybindings]
+  (spacemacs/set-leader-keys "SPC" 'avy-goto-char-timer)
   (spacemacs/set-leader-keys "=" 'vc-resolve-conflicts)
-
-  ;; - display sysinfo in minibuffer -
-  (symon-mode))
+  )
