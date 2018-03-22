@@ -220,7 +220,7 @@ you should place your code here."
    ;; no acceleration on mouse wheel.
    mouse-wheel-progressive-speed nil
    ;; min number of lines to keep below/above the cursor in view.
-   scroll-margin 5
+   scroll-margin 0
    ;; open urls -> google-chrome
    browse-url-browser-function 'browse-url-generic
    browse-url-generic-program "google-chrome")
