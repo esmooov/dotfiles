@@ -233,6 +233,9 @@ you should place your code here."
   (custom-set-variables
    '(markdown-command "/usr/bin/pandoc"))
 
+  ;; editorconfig
+  (editorconfig-mode 1)
+
   ;; [hooks]
   ;; prog.
   (defun custom-prog-hook ()
