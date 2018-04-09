@@ -225,6 +225,8 @@ you should place your code here."
    browse-url-browser-function 'browse-url-generic
    browse-url-generic-program "google-chrome")
 
+  ;; show whitespace
+  (global-whitespace-mode 1)
   ;; no double spacing sentences.
   (setq sentence-end-double-space nil)
   ;; follow symlinks when editing.
