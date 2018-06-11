@@ -204,6 +204,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
    ;; plantuml
    plantuml-jar-path (expand-file-name "c:/bin/plantuml/plantuml.jar")
+   
+   ;; Projectile Git Grep
+   projectile-use-git-grep 1
    ))
 
 (defun dotspacemacs/user-config ()
