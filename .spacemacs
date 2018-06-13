@@ -22,7 +22,9 @@
      javascript
      latex
      plantuml
-     (python :variables python-enable-yapf-format-on-save t)
+     (python :variables 
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t)
      shell-scripts
      sql
      yaml
