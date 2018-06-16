@@ -151,6 +151,7 @@ proj() {
     cd ~/projects
 }
 
+# - nvm auto use nvmrc
 autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
