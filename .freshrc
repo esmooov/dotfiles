@@ -53,6 +53,7 @@ fresh-options                                                  --bin
   fresh     nate-wilkins/gh-backup                  gh-backup.sh      # simple bash script to backup a GitHub user's repo.
 
   # local
+  fresh                                  bin/EDITOR            # executes my editor consistently. $EDITOR -> bin/EDITOR
   fresh                                  bin/trim.sh           # trim leading and trailing whitespace.
   fresh                                  bin/perm.sh           # get user and group permissions.
   fresh                                  bin/git-safe-clone.sh # clone or pull a repository.

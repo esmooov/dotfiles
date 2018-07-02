@@ -16,7 +16,9 @@ alias cb="xclip -selection clipboard"
 alias gpgls="gpg --list-secret-keys --keyid-format LONG"
 
 # - emacs
-alias view="emacs --insert /dev/stdin"
+# TODO: This doesn't work...
+alias view="emacsclient --insert /dev/stdin"
+alias EDITOR="~/bin/EDITOR"
 
 # - web
 alias internet="ping 8.8.8.8"
