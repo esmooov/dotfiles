@@ -22,7 +22,7 @@
      javascript
      latex
      plantuml
-     (python :variables 
+     (python :variables
              python-enable-yapf-format-on-save t
              python-sort-imports-on-save t)
      shell-scripts
@@ -30,7 +30,12 @@
      yaml
      docker
      helm
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-help-tooltip t)
      emacs-lisp
      git
      github
@@ -40,7 +45,28 @@
             shell-default-position 'bottom)
      spell-checking
      syntax-checking
-     version-control
+     ;; - [ version-control ] --------------------------------------
+     ;; SPC g . h	:: Show diff of hunk
+     ;; SPC g . n	:: Next hunk
+     ;; SPC g . N	:: Previous hunk
+     ;; SPC g . p	:: Previous hunk
+     ;; SPC g . r	:: Revert hunk
+     ;; SPC g . s	:: Stage hunk
+     ;; SPC g . t	:: Toggle margin indicators
+     ;; SPC g . w	:: Stage file
+     ;; SPC g . u	:: Unstage file
+     ;; SPC g . d	:: Repo diff popup
+     ;; SPC g . D	:: Show diffs of unstaged hunks
+     ;; SPC g . c	:: Commit with popup
+     ;; SPC g . C	:: Commit
+     ;; SPC g . P	:: Push repo with popup
+     ;; SPC g . f	:: Fetch for repo with popup
+     ;; SPC g . F	:: Pull repo with popup
+     ;; SPC g . l	:: Show repo log
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-diff-side 'left
+                      version-control-global-margin t)
      emoji
      spotify
      twitter
@@ -74,8 +100,7 @@
      prodigy
      restclient
      systemd
-     plantuml
-     )
+     plantuml)
 
    dotspacemacs-additional-packages
    '(
@@ -85,8 +110,7 @@
      google-this
 
      ;; https://github.com/melpa/melpa#recipe-format
-     (speed-type :repo "hagleitn/speed-type" :fetcher github :files ("speed-type.el"))
-     )
+     (speed-type :repo "hagleitn/speed-type" :fetcher github :files ("speed-type.el")))
 
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
@@ -120,7 +144,7 @@ values."
    ;; Fonts
    ;; - Source Code Pro
    ;; - Hack
-   dotspacemacs-default-font '("Hack"
+   dotspacemacs-default-font '("Source Code Pro"
                                :size 14
                                :weight normal
                                :width normal
@@ -148,7 +172,7 @@ values."
    dotspacemacs-helm-position 'bottom
    dotspacemacs-helm-use-fuzzy 'always
    dotspacemacs-enable-paste-transient-state t
-   dotspacemacs-which-key-delay 0.2
+   dotspacemacs-which-key-delay 0.4
    dotspacemacs-which-key-position 'bottom
    dotspacemacs-loading-progress-bar t
    dotspacemacs-fullscreen-at-startup nil
@@ -206,7 +230,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
    ;; plantuml
    plantuml-jar-path (expand-file-name "c:/bin/plantuml/plantuml.jar")
-   
+
    ;; Projectile Git Grep
    projectile-use-git-grep 1
    ))
@@ -238,8 +262,48 @@ you should place your code here."
   (custom-set-variables
    '(markdown-command "/usr/bin/pandoc"))
 
+  ;; -[ centered-cursor ]---------------------------------------
+  (global-centered-cursor-mode)
+
+  ;; -[ company ]------------------------------------------------
+  ;; C-d	    :: open minibuffer with documentation of thing at point in company dropdown
+  ;; C-/	    :: show candidates in Helm (for fuzzy searching)
+  ;; C-M-/	  :: filter the company dropdown menu
+  ;; M-h	    :: show current candidate’s documentation in a tooltip (requires auto-completion-enable-help-tooltip)
+  ;; ------------------------------------------------------------
+  ;; C-j	    :: go down in company dropdown menu
+  ;; C-k	    :: go up in company dropdown menu
+  ;; C-l	    :: complete selection
+  (setq company-idle-delay .1)
+  (setq company-minimum-prefix-length 1)
+  (setq company-selection-wrap-around t)
+  (setq company-lighter "")
+  (custom-set-faces
+  '(company-tooltip-common
+     ((t (:inherit company-tooltip :weight bold :underline nil))))
+  '(company-tooltip-common-selection
+     ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+  (global-company-mode)
+
   ;; editorconfig
   (editorconfig-mode 1)
+
+  ;; - [ magit ] -------------------------------------------
+  ;; if the branch has a jira ticket, add that to the commit message.
+  ;; https://github.com/gopar/.emacs.d/blob/9bf836ed254c7e5ebaeff97e19e4bb3fd5f84e73/init.el#L523
+  (add-hook 'git-commit-setup-hook
+    '(lambda ()
+       (let ((has-ticket-title (string-match "^[A-Z]+-[0-9]+" (magit-get-current-branch)))
+              (words (s-split-words (magit-get-current-branch))))
+         (if has-ticket-title
+           (insert (format "%s-%s " (car words) (car (cdr words))))))))
+
+  ;; - [ flycheck ] ----------------------------------------
+  ;; stop flycheck from saying this is a dangerous variable
+  ;; https://github.com/gopar/.emacs.d/blob/9bf836ed254c7e5ebaeff97e19e4bb3fd5f84e73/init.el#L634
+  (put 'flycheck-python-mypy-args 'safe-local-variable (lambda (x) t))
+  (put 'flycheck-python-mypy-executable 'safe-local-variable (lambda (x) t))
+
 
   ;; [hooks]
   ;; prog.
@@ -270,4 +334,6 @@ you should place your code here."
   ;; [keybindings]
   (spacemacs/set-leader-keys "SPC" 'avy-goto-char-timer)
   (spacemacs/set-leader-keys "=" 'vc-resolve-conflicts)
-  )
+
+  ;; rebind SPC-q-q to frame-killer (so we don't kill the daemon emacs server)
+  (evil-leader/set-key "q q" 'spacemacs/frame-killer))
