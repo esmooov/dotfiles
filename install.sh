@@ -85,11 +85,34 @@ DOTFILES_SCHEME=${DOTFILES_SCHEME:=harmonic}
 DOTFILES_THEME=${DOTFILES_THEME:=dark}
 DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED:=no}
 
+# OS specific setup.
+UNAME_OUTPUT="$(uname -s)"
+case "${UNAME_OUTPUT}" in
+    Linux*)
+        DOTFILES_MACHINE=Linux
+        DOTFILES_HOME=/home/$EVE_USER
+        DOTFILES_GROUP=$EVE_USER
+        ;;
+
+    Darwin*)
+        DOTFILES_MACHINE=Mac
+        DOTFILES_HOME=/Users/$EVE_USER
+        DOTFILES_GROUP=staff
+        ;;
+
+    CYGWIN*)    DOTFILES_MACHINE=Cygwin;;
+    MINGW*)     DOTFILES_MACHINE=MinGw;;
+    *)          DOTFILES_MACHINE="UNKNOWN:${UNAME_OUTPUT}"
+esac
+
 echo "                                          "
 echo "< starting install >                      "
 echo "                                          "
 echo "[vars]                                    "
+echo "machine=$DOTFILES_MACHINE                 "
 echo "user=$DOTFILES_USER                       "
+echo "group=$DOTFILES_GROUP                     "
+echo "home=$DOTFILES_HOME                       "
 echo "dirname=$ROOT_DIR                         "
 echo "--scheme=$DOTFILES_SCHEME                 "
 echo "--theme=$DOTFILES_THEME                   "
@@ -99,7 +122,7 @@ echo "                                          "
 # -[ dependencies ]------------------------------------------- #
 # /
 # - base16-builder
-su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && npm install --global base16-builder"
+su $DOTFILES_USER -c ". $DOTFILES_HOME/.nvm/nvm.sh && npm install --global base16-builder"
 
 # -[ theme ]-------------------------------------------------- #
 # /
@@ -109,50 +132,50 @@ su $DOTFILES_USER -c "mkdir -p $ROOT_DIR/.theme/"
 # - spacemacs
 # TODO: should output to ROOT_DIR and freshen with freshrc.
 #       also need ability for spacemacs to support custom.
-su $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme"
-SPACEMACS_THEME=/home/$DOTFILES_USER/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
+su $DOTFILES_USER -c "mkdir -p $DOTFILES_HOME/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme"
+SPACEMACS_THEME=$DOTFILES_HOME/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
 [ -f $SPACEMACS_THEME ] && rm -f $SPACEMACS_THEME
-su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
+su $DOTFILES_USER -c ". $DOTFILES_HOME/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
 
 # - bspwm
 [ -f $ROOT_DIR/.theme/bspwm.color.sh ] && rm -f $ROOT_DIR/.theme/bspwm.color.sh
-su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
+su $DOTFILES_USER -c ". $DOTFILES_HOME/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
 
 # - dmenu
 [ -f $ROOT_DIR/.theme/dmenu.color-shell.sh ] && rm -f $ROOT_DIR/.theme/dmenu.color-shell.sh
-DMENU_COLOR=$(runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$'")
+DMENU_COLOR=$(su $DOTFILES_USER -c ". $DOTFILES_HOME/.nvm/nvm.sh && base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$'")
 su $DOTFILES_USER -c "echo alias dmenu=$DMENU_COLOR > $ROOT_DIR/.theme/dmenu.color-shell.sh"
 
 # - termite
 [ -f $ROOT_DIR/.theme/termite.color ] && rm -f $ROOT_DIR/.theme/termite.color
-su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
+su $DOTFILES_USER -c ". $DOTFILES_HOME/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
 
 # -[ fresh ]-------------------------------------------------- #
 # /
-su $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/bin"
-[ -d /home/$DOTFILES_USER/.fresh ]   && rm -rf /home/$DOTFILES_USER/.fresh
-[ -f /home/$DOTFILES_USER/.freshrc ] && rm -f  /home/$DOTFILES_USER/.freshrc
+su $DOTFILES_USER -c "mkdir -p $DOTFILES_HOME/bin"
+[ -d $DOTFILES_HOME/.fresh ]   && rm -rf $DOTFILES_HOME/.fresh
+[ -f $DOTFILES_HOME/.freshrc ] && rm -f  $DOTFILES_HOME/.freshrc
 # cleanup fresh symlinks.
-find /home/$DOTFILES_USER/ -lname /home/$DOTFILES_USER/.fresh/* -delete
+find $DOTFILES_HOME/ -lname $DOTFILES_HOME/.fresh/* -delete
 
 # make freshrc available for fresh.
-cp $ROOT_DIR/.freshrc /home/$DOTFILES_USER/.freshrc
-chown $DOTFILES_USER:$DOTFILES_USER /home/$DOTFILES_USER/.freshrc
+cp $ROOT_DIR/.freshrc $DOTFILES_HOME/.freshrc
+chown $DOTFILES_USER:$DOTFILES_GROUP $DOTFILES_HOME/.freshrc
 
 # write variables for fresh.
-[ -f /home/$DOTFILES_USER/.freshvars ] && rm -f /home/$DOTFILES_USER/.freshvars
-echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > /home/$DOTFILES_USER/.freshvars
-chmod u+x /home/$DOTFILES_USER/.freshvars
+[ -f $DOTFILES_HOME/.freshvars ] && rm -f $DOTFILES_HOME/.freshvars
+echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > $DOTFILES_HOME/.freshvars
+chmod u+x $DOTFILES_HOME/.freshvars
 
   FRESH_LOCAL_SOURCE=$DOTFILES_USER/dotfiles
   su $DOTFILES_USER -c 'source <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)'
 
 # make sure spacemacs can modify for generated lisp.
-chmod 666 /home/$DOTFILES_USER/.fresh/build/spacemacs
+chmod 666 $DOTFILES_HOME/.fresh/build/spacemacs
 
 # sourced in .zshrc
-chmod +x /home/$DOTFILES_USER/.fresh/build/shell.sh
-chmod +x /home/$DOTFILES_USER/.fresh/build/config-bspwm-bspwmrc
+chmod +x $DOTFILES_HOME/.fresh/build/shell.sh
+chmod +x $DOTFILES_HOME/.fresh/build/config-bspwm-bspwmrc
