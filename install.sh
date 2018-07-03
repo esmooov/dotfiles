@@ -99,40 +99,40 @@ echo "                                          "
 # -[ dependencies ]------------------------------------------- #
 # /
 # - base16-builder
-runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && npm install --global base16-builder"
+su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && npm install --global base16-builder"
 
 # -[ theme ]-------------------------------------------------- #
 # /
 [ -d $ROOT_DIR/.theme/ ] && rm -rf $ROOT_DIR/.theme/
-runuser -l $DOTFILES_USER -c "mkdir -p $ROOT_DIR/.theme/"
+su $DOTFILES_USER -c "mkdir -p $ROOT_DIR/.theme/"
 
 # - spacemacs
 # TODO: should output to ROOT_DIR and freshen with freshrc.
 #       also need ability for spacemacs to support custom.
-runuser -l $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme"
+su $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme"
 SPACEMACS_THEME=/home/$DOTFILES_USER/.spacemacs.d/private/local/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}-theme/base16-${DOTFILES_SCHEME}16-${DOTFILES_THEME}.el
 [ -f $SPACEMACS_THEME ] && rm -f $SPACEMACS_THEME
-runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
+su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t emacs > $SPACEMACS_THEME"
 
 # - bspwm
 [ -f $ROOT_DIR/.theme/bspwm.color.sh ] && rm -f $ROOT_DIR/.theme/bspwm.color.sh
-runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
+su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t bspwm > $ROOT_DIR/.theme/bspwm.color.sh"
 
 # - dmenu
 [ -f $ROOT_DIR/.theme/dmenu.color-shell.sh ] && rm -f $ROOT_DIR/.theme/dmenu.color-shell.sh
 DMENU_COLOR=$(runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh && base16-builder   -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t dmenu | grep -q '^[^#]*$'")
-runuser -l $DOTFILES_USER -c "echo alias dmenu=$DMENU_COLOR > $ROOT_DIR/.theme/dmenu.color-shell.sh"
+su $DOTFILES_USER -c "echo alias dmenu=$DMENU_COLOR > $ROOT_DIR/.theme/dmenu.color-shell.sh"
 
 # - termite
 [ -f $ROOT_DIR/.theme/termite.color ] && rm -f $ROOT_DIR/.theme/termite.color
-runuser -l $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
+su $DOTFILES_USER -c ". /home/$DOTFILES_USER/.nvm/nvm.sh &&  base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t termite > $ROOT_DIR/.theme/termite.color"
 
 # TODO: chrome-devtools :: find config location
 #       base16-builder -s $DOTFILES_SCHEME -b $DOTFILES_THEME -t chrome-devtools
 
 # -[ fresh ]-------------------------------------------------- #
 # /
-runuser -l $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/bin"
+su $DOTFILES_USER -c "mkdir -p /home/$DOTFILES_USER/bin"
 [ -d /home/$DOTFILES_USER/.fresh ]   && rm -rf /home/$DOTFILES_USER/.fresh
 [ -f /home/$DOTFILES_USER/.freshrc ] && rm -f  /home/$DOTFILES_USER/.freshrc
 # cleanup fresh symlinks.
@@ -148,7 +148,7 @@ echo "DOTFILES_SKIP_ENCRYPTED=${DOTFILES_SKIP_ENCRYPTED}" > /home/$DOTFILES_USER
 chmod u+x /home/$DOTFILES_USER/.freshvars
 
   FRESH_LOCAL_SOURCE=$DOTFILES_USER/dotfiles
-  runuser -l $DOTFILES_USER -c 'source <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)'
+  su $DOTFILES_USER -c 'source <(curl -sL https://raw.githubusercontent.com/freshshell/fresh/master/install.sh)'
 
 # make sure spacemacs can modify for generated lisp.
 chmod 666 /home/$DOTFILES_USER/.fresh/build/spacemacs
