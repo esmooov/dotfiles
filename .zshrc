@@ -103,13 +103,13 @@ zstyle ':completion:*' insert-tab false
 #  .kerl/scripts       -> erlang version manager
 #  .kiex/scripts       -> elixir version manager
 #  .kiex/elixirs/*.env -> elixir
+#  coreutils/libexec   -> readlink (mac only)
 
 source "$HOME/.kiex/scripts/kiex"
 source "$(find $HOME/.kiex/elixirs/*.env -type f | sort | head -n 1)"
 
 ERL_VERSION="$(basename $(find $HOME/.kerl/builds/* -type d | sort | head -n 1))"
 
-# cargo, diff-so-fancy, kerl, erl, readlink (mac only)
 export PATH=$HOME/bin\
 :$HOME/.cargo/bin\
 :$HOME/.diff-so-fancy\
