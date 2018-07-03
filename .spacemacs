@@ -262,9 +262,6 @@ you should place your code here."
   (custom-set-variables
    '(markdown-command "/usr/bin/pandoc"))
 
-  ;; -[ centered-cursor ]---------------------------------------
-  (global-centered-cursor-mode)
-
   ;; -[ company ]------------------------------------------------
   ;; C-d	    :: open minibuffer with documentation of thing at point in company dropdown
   ;; C-/	    :: show candidates in Helm (for fuzzy searching)
