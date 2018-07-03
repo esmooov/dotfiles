@@ -90,13 +90,13 @@ UNAME_OUTPUT="$(uname -s)"
 case "${UNAME_OUTPUT}" in
     Linux*)
         DOTFILES_MACHINE=Linux
-        DOTFILES_HOME=/home/$EVE_USER
-        DOTFILES_GROUP=$EVE_USER
+        DOTFILES_HOME=/home/$DOTFILES_USER
+        DOTFILES_GROUP=$DOTFILES_USER
         ;;
 
     Darwin*)
         DOTFILES_MACHINE=Mac
-        DOTFILES_HOME=/Users/$EVE_USER
+        DOTFILES_HOME=/Users/$DOTFILES_USER
         DOTFILES_GROUP=staff
         ;;
 
