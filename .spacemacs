@@ -15,6 +15,7 @@
    dotspacemacs-delete-orphan-packages t
    dotspacemacs-configuration-layers
    '(
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
      elixir
      erlang
      csharp
