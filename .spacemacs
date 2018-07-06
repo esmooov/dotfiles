@@ -20,7 +20,10 @@
      erlang
      csharp
      html
-     javascript
+     (javascript :variables
+                 js2-mode-show-parse-errors t
+                 js2-mode-show-strict-warnings t)
+     react
      latex
      plantuml
      (python :variables
@@ -109,9 +112,15 @@
      expand-region
      emojify
      google-this
+     prettier-js
 
      ;; https://github.com/melpa/melpa#recipe-format
      (speed-type :repo "hagleitn/speed-type" :fetcher github :files ("speed-type.el")))
+
+     ;; TODO: Use a better flowjs implementation?
+     ;;(flow-for-emacs :repo "flowtype/flow-for-emacs" :fetcher github :files ("flow.el"))
+     ;;(flow-minor-mode :repo "an-sh/flow-minor-mode" :fetcher github :files ("flow-minor-mode.el"))
+     ;;(flow-js2-mode :repo "Fuco1/flow-js2-mode" :fetcher github :files ("flow-js2-test-helpers.el", "flow-js2-mode.el")))
 
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
@@ -233,8 +242,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
    plantuml-jar-path (expand-file-name "c:/bin/plantuml/plantuml.jar")
 
    ;; Projectile Git Grep
-   projectile-use-git-grep 1
-   ))
+   projectile-use-git-grep 1))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -302,6 +310,76 @@ you should place your code here."
   (put 'flycheck-python-mypy-args 'safe-local-variable (lambda (x) t))
   (put 'flycheck-python-mypy-executable 'safe-local-variable (lambda (x) t))
 
+  ;; javascript
+  ;; TOOD:
+  ;; - use single mode for editing JS (js2-mode vs web-mode vs react-mode).
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+
+  ;; javascript.flowjs (http://flowtype.org)
+  ;; https://github.com/bodil/emacs.d/blob/master/bodil/bodil-js.el
+  (defun flycheck-parse-flow (output checker buffer)
+    (let ((json-array-type 'list))
+      (let ((o (json-read-from-string output)))
+        (mapcar #'(lambda (errp)
+                    (let ((err (cadr (assoc 'message errp))))
+                      (flycheck-error-new
+                       :line (cdr (assoc 'line err))
+                       :column (cdr (assoc 'start err))
+                       :level 'error
+                       :message (cdr (assoc 'descr err))
+                       :filename (f-relative
+                                  (cdr (assoc 'path err))
+                                  (f-dirname (file-truename
+                                              (buffer-file-name))))
+                       :buffer buffer
+                       :checker checker)))
+                (cdr (assoc 'errors o))))))
+
+  (flycheck-define-checker javascript-flow
+    "Javascript type checking using Flow."
+    :command ("flow" "--json" source-original)
+    :error-parser flycheck-parse-flow
+    :modes react-mode
+    :next-checkers ((error . javascript-eslint)))
+
+  (add-to-list 'flycheck-checkers 'javascript-flow)
+
+  ;; javascript.eslint
+  ;; disable jshint -> prefer eslint
+  (setq-default flycheck-disabled-checkers
+    (append flycheck-disabled-checkers
+      '(javascript-jshint)))
+
+  ;; eslint in (web-mode, js2-mode)
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-mode 'javascript-flow 'web-mode)
+  (flycheck-add-mode 'javascript-eslint 'js2-mode)
+  (flycheck-add-mode 'javascript-flow 'js2-mode)
+
+  ;; set flycheck temp file prefix.
+  (setq-default flycheck-temp-prefix ".flycheck")
+
+  ;; javascript.eslint.hooks
+  ;; use local eslint from node_modules before global
+  ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+  (defun my/use-eslint-from-node-modules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint (and root
+                     (expand-file-name "node_modules/eslint/bin/eslint.js"
+                      root))))
+     (when (and eslint (file-executable-p eslint))
+       (setq-local flycheck-javascript-eslint-executable eslint))))
+
+  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
+  ;; javascript.prettier
+  ;; https://github.com/prettier/prettier-emacs/blob/master/prettier-js.el
+  ;; javascript.prettier.hooks
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'react-mode-hook 'prettier-js-mode)
 
   ;; [hooks]
   ;; prog.
@@ -332,6 +410,13 @@ you should place your code here."
   ;; [keybindings]
   (spacemacs/set-leader-keys "SPC" 'avy-goto-char-timer)
   (spacemacs/set-leader-keys "=" 'vc-resolve-conflicts)
+
+  (global-set-key [f7] 'spacemacs/previous-error)
+  (global-set-key [f8] 'spacemacs/next-error)
+
+  ;; projectile
+  (spacemacs/set-leader-keys "p-D" 'projectile-dired-other-window)
+  (spacemacs/set-leader-keys "p-d" 'projectile-dired)
 
   ;; rebind SPC-q-q to frame-killer (so we don't kill the daemon emacs server)
   (evil-leader/set-key "q q" 'spacemacs/frame-killer))
