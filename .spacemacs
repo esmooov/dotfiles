@@ -113,6 +113,7 @@
      emojify
      google-this
      prettier-js
+     add-node-modules-path
 
      ;; https://github.com/melpa/melpa#recipe-format
      (speed-type :repo "hagleitn/speed-type" :fetcher github :files ("speed-type.el")))
@@ -251,6 +252,13 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (require 'flycheck)
+
+  ;; MacOS PATH
+  (when (memq window-system '(mac ns))
+    (setq exec-path-from-shell-variables '("PATH" "HOME"))
+       (exec-path-from-shell-initialize))
+
   (setq-default
    ;; deft.
    deft-directory "~/Dropbox/Notes"
@@ -315,6 +323,9 @@ you should place your code here."
   ;; - use single mode for editing JS (js2-mode vs web-mode vs react-mode).
   (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
 
+  ;; javascript.node_modules.bin
+  (add-hook 'flycheck-mode-hook 'add-node-modules-path)
+
   ;; javascript.flowjs (http://flowtype.org)
   ;; https://github.com/bodil/emacs.d/blob/master/bodil/bodil-js.el
   (defun flycheck-parse-flow (output checker buffer)
@@ -355,24 +366,11 @@ you should place your code here."
   (flycheck-add-mode 'javascript-flow 'web-mode)
   (flycheck-add-mode 'javascript-eslint 'js2-mode)
   (flycheck-add-mode 'javascript-flow 'js2-mode)
+  (flycheck-add-mode 'javascript-eslint 'react-mode)
+  (flycheck-add-node 'javascript-flow 'react-mode)
 
   ;; set flycheck temp file prefix.
   (setq-default flycheck-temp-prefix ".flycheck")
-
-  ;; javascript.eslint.hooks
-  ;; use local eslint from node_modules before global
-  ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-  (defun my/use-eslint-from-node-modules ()
-    (let* ((root (locate-dominating-file
-                  (or (buffer-file-name) default-directory)
-                  "node_modules"))
-           (eslint (and root
-                     (expand-file-name "node_modules/eslint/bin/eslint.js"
-                      root))))
-     (when (and eslint (file-executable-p eslint))
-       (setq-local flycheck-javascript-eslint-executable eslint))))
-
-  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
   ;; javascript.prettier
   ;; https://github.com/prettier/prettier-emacs/blob/master/prettier-js.el
