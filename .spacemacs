@@ -19,6 +19,7 @@
      elixir
      erlang
      csharp
+     fsharp
      html
      (javascript :variables
                  js2-mode-show-parse-errors t
