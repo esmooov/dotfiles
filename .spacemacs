@@ -255,11 +255,6 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (require 'flycheck)
 
-  ;; MacOS PATH
-  (when (memq window-system '(mac ns))
-    (setq exec-path-from-shell-variables '("PATH" "HOME"))
-       (exec-path-from-shell-initialize))
-
   (setq-default
    ;; deft.
    deft-directory "~/Dropbox/Notes"
