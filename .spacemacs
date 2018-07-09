@@ -363,7 +363,7 @@ you should place your code here."
   (flycheck-add-mode 'javascript-eslint 'js2-mode)
   (flycheck-add-mode 'javascript-flow 'js2-mode)
   (flycheck-add-mode 'javascript-eslint 'react-mode)
-  (flycheck-add-node 'javascript-flow 'react-mode)
+  (flycheck-add-mode 'javascript-flow 'react-mode)
 
   ;; set flycheck temp file prefix.
   (setq-default flycheck-temp-prefix ".flycheck")
