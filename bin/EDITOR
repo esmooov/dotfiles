@@ -1,5 +1,5 @@
 #! /bin/sh
-if test -e "/tmp/emacs1000/server" || test -e ~/.emacs.d/server/server; then
+if test -e "/tmp/emacs1000/server" || test -e ~/.emacs.d/server/server || test -e "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"; then
     emacsclient -c "$@"
 else
     emacs --eval="(server-start)" "$@"
