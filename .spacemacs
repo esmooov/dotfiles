@@ -16,6 +16,7 @@
    dotspacemacs-configuration-layers
    '(
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     ;; TODO: spacemacs-purpose
      elixir
      erlang
      csharp
@@ -114,7 +115,7 @@
      emojify
      google-this
      prettier-js
-     add-node-modules-path
+     add-node-modules-path,
 
      ;; https://github.com/melpa/melpa#recipe-format
      (speed-type :repo "hagleitn/speed-type" :fetcher github :files ("speed-type.el")))
@@ -189,7 +190,7 @@ values."
    dotspacemacs-loading-progress-bar t
    dotspacemacs-fullscreen-at-startup nil
    dotspacemacs-fullscreen-use-non-native nil
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    dotspacemacs-active-transparency 95
    dotspacemacs-inactive-transparency 60
    dotspacemacs-show-transient-state-title t
@@ -285,7 +286,7 @@ you should place your code here."
   ;; C-k	    :: go up in company dropdown menu
   ;; C-l	    :: complete selection
   (setq company-idle-delay .1)
-  (setq company-minimum-prefix-length 1)
+  (setq company-minimum-prefix-length 2)
   (setq company-selection-wrap-around t)
   (setq company-lighter "")
   (custom-set-faces
@@ -403,14 +404,14 @@ you should place your code here."
 
   ;; [keybindings]
   (spacemacs/set-leader-keys "SPC" 'avy-goto-char-timer)
-  (spacemacs/set-leader-keys "=" 'vc-resolve-conflicts)
+  (spacemacs/set-leader-keys "=" 'magit-ediff-resolve)
 
   (global-set-key [f7] 'spacemacs/previous-error)
   (global-set-key [f8] 'spacemacs/next-error)
 
   ;; projectile
-  (spacemacs/set-leader-keys "p-D" 'projectile-dired-other-window)
-  (spacemacs/set-leader-keys "p-d" 'projectile-dired)
+  (spacemacs/set-leader-keys "p D" 'projectile-dired-other-window)
+  (spacemacs/set-leader-keys "p d" 'projectile-dired)
 
   ;; rebind SPC-q-q to frame-killer (so we don't kill the daemon emacs server)
-  (evil-leader/set-key "q q" 'spacemacs/frame-killer))
+  (spacemacs/set-leader-keys "q q" 'spacemacs/frame-killer))
