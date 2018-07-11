@@ -118,6 +118,9 @@ export PATH=$HOME/bin\
 :/usr/local/opt/coreutils/libexec/gnubin\
 :$PATH
 
+# - pyenv
+eval "$(pyenv init -)"
+
 # - kerl
 export KERL_DEFAULT_INSTALL_DIR=$HOME/.kerl/installs
 
