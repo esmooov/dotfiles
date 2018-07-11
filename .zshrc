@@ -45,6 +45,12 @@ antigen bundle heroku
 antigen bundle git-flow
 antigen bundle command-not-found
 antigen bundle nyan
+antigen bundle httpie
+antigen bundle nvm
+antigen bundle pyenv
+antigen bundle colored-man-pages
+antigen bundle dotenv
+antigen bundle zsh_reload
 
 antigen bundle   lukechilds/zsh-nvm
 antigen bundle    zsh-users/zsh-completions
@@ -117,9 +123,6 @@ export PATH=$HOME/bin\
 :$HOME/.kerl/installs/$ERL_VERSION/bin\
 :/usr/local/opt/coreutils/libexec/gnubin\
 :$PATH
-
-# - pyenv
-eval "$(pyenv init -)"
 
 # - kerl
 export KERL_DEFAULT_INSTALL_DIR=$HOME/.kerl/installs
