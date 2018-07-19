@@ -257,6 +257,9 @@ you should place your code here."
   (require 'flycheck)
 
   (setq-default
+   ;; magit
+   magit-repository-directories '("~/projects/")
+
    ;; deft.
    deft-directory "~/Dropbox/Notes"
    deft-extensions '("md", "txt")
