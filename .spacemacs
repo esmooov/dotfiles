@@ -137,6 +137,8 @@ You should not put any user code in there besides modifying the variable
 values."
 
   (setq-default
+   ;; spaceline
+   dotspacemacs-mode-line-theme 'spacemacs
    dotspacemacs-elpa-https t
    dotspacemacs-elpa-timeout 5
    dotspacemacs-check-for-update t
