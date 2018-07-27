@@ -22,6 +22,7 @@
      csharp
      fsharp
      html
+     chrome
      (javascript :variables
                  js2-mode-show-parse-errors t
                  js2-mode-show-strict-warnings t)
@@ -243,6 +244,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
    twittering-timer-interval 30
    twittering-display-remaining t
 
+   ;; chrome
+   (setq edit-server-url-major-mode-alist
+     '(("github\\.com" . org-mode)))
+
    ;; plantuml
    plantuml-jar-path (expand-file-name "c:/bin/plantuml/plantuml.jar")
 
@@ -417,6 +422,9 @@ you should place your code here."
   ;; projectile
   (spacemacs/set-leader-keys "p D" 'projectile-dired-other-window)
   (spacemacs/set-leader-keys "p d" 'projectile-dired)
+
+  ;; chrome
+  (spacemacs/set-leader-keys-for-minor-mode 'edit-server-edit-mode "q q" 'edit-server-done)
 
   ;; rebind SPC-q-q to frame-killer (so we don't kill the daemon emacs server)
   (spacemacs/set-leader-keys "q q" 'spacemacs/frame-killer))
