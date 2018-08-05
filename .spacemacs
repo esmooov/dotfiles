@@ -227,7 +227,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq
    ;; neotree
    neo-theme 'nerd
-
+   neo-show-hidden-files nil
+   
    ;; markdown
    markdown-live-preview-engine 'vmd
 
